@@ -97,7 +97,7 @@
       position:relative;
     }
     .video-wrapper::before{
-      content:'ویدیوی معرفی';
+      content:'🎬 ویدیوی معرفی';
       position:absolute;top:-15px;right:30px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       padding:.5rem 1.5rem;
@@ -109,7 +109,7 @@
     }
     .video-container{
       position:relative;
-      padding-bottom:56.25%; 
+      padding-bottom:56.25%; /* 16:9 Aspect Ratio */
       height:0;
       overflow:hidden;
       border-radius:15px;
@@ -172,7 +172,7 @@
     }
     .list-item{margin:1.5rem 0;padding-right:1.5rem;position:relative}
     .list-item::before{
-      content:">";position:absolute;right:0;color:var(--accent);font-size:1.2rem;
+      content:"▸";position:absolute;right:0;color:var(--accent);font-size:1.2rem;
     }
     footer{
       text-align:center;padding:3rem 2rem;font-size:1rem;color:var(--gray);
@@ -184,7 +184,7 @@
       color:var(--text);font-size:1.5rem;transition:color .3s,transform .3s;
     }
     .footer-icons a:hover{color:var(--accent);transform:translateY(-5px)}
-    /* Chatbot Styles */
+    /* Chatbot Styles - Enhanced */
     .chatbot-float{
       position:fixed;bottom:2rem;left:2rem;z-index:3000;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
@@ -280,6 +280,21 @@
     .message-time{
       font-size:.7rem;color:var(--gray);margin-top:.3rem;text-align:left;
     }
+    /* New: Chatbot features */
+    .chatbot-welcome{
+      background:linear-gradient(135deg,var(--accent)30%,var(--accent2)70%);
+      padding:.5rem 1rem;border-radius:10px;margin-bottom:.5rem;
+      font-size:.85rem;color:var(--bg);font-weight:500;
+    }
+    .chatbot-stats{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:.3rem .5rem;font-size:.75rem;color:var(--gray);
+      border-top:1px solid #ffffff1a;
+    }
+    .chatbot-learning-mode{
+      display:flex;align-items:center;gap:.3rem;
+      color:var(--accent);font-weight:500;
+    }
     .chatbot-suggestion{
       display:inline-block;background:var(--card);border:1px solid var(--accent);
       padding:.2rem .6rem;border-radius:12px;margin:.2rem;font-size:.75rem;
@@ -290,6 +305,7 @@
     }
     @media(max-width:768px){
       .chatbot-container{width:100%;height:100%;max-width:100%;max-height:100%;bottom:0;left:0;border-radius:0}
+      .chatbot-container.active{transform:scale(1) translateY(0)}
     }
   </style>
 </head>
@@ -301,24 +317,24 @@
 <div class="sidebar" id="sidebar">
   <h3>فهرست مطالب</h3>
   <ul>
-    <li><a href="#video">ویدیوی معرفی</a></li>
-    <li><a href="#abstract">چکیده</a></li>
-    <li><a href="#intro">مقدمه</a></li>
-    <li><a href="#def-ai">تعریف AI</a></li>
-    <li><a href="#def-agi">تعریف AGI</a></li>
-    <li><a href="#diff">تفاوت‌ها</a></li>
-    <li><a href="#history">تاریخچه</a></li>
-    <li><a href="#ml">ML چیست؟</a></li>
-    <li><a href="#types">انواع یادگیری</a></li>
-    <li><a href="#medical">کاربرد پزشکی</a></li>
-    <li><a href="#auto">خودروهای خودران</a></li>
-    <li><a href="#recommend">سیستم توصیه‌گر</a></li>
-    <li><a href="#nlp">پردازش زبان</a></li>
-    <li><a href="#security">امنیت سایبری</a></li>
-    <li><a href="#ethics">چالش‌های اخلاقی</a></li>
-    <li><a href="#jobs">فرصت‌های شغلی</a></li>
-    <li><a href="#conclusion">نتیجه‌گیری</a></li>
-    <li><a href="#sources">منابع</a></li>
+    <li><a href="#video"><i class="fas fa-video"></i> ویدیوی معرفی</a></li>
+    <li><a href="#abstract"><i class="fas fa-clipboard-list"></i> چکیده</a></li>
+    <li><a href="#intro"><i class="fas fa-brain"></i> مقدمه</a></li>
+    <li><a href="#def-ai"><i class="fas fa-robot"></i> تعریف AI</a></li>
+    <li><a href="#def-agi"><i class="fas fa-globe"></i> تعریف AGI</a></li>
+    <li><a href="#diff"><i class="fas fa-sitemap"></i> تفاوت‌ها</a></li>
+    <li><a href="#history"><i class="fas fa-history"></i> تاریخچه</a></li>
+    <li><a href="#ml"><i class="fas fa-cogs"></i> ML چیست؟</a></li>
+    <li><a href="#types"><i class="fas fa-graduation-cap"></i> انواع یادگیری</a></li>
+    <li><a href="#medical"><i class="fas fa-heartbeat"></i> کاربرد پزشکی</a></li>
+    <li><a href="#auto"><i class="fas fa-car"></i> خودروهای خودران</a></li>
+    <li><a href="#recommend"><i class="fas fa-thumbs-up"></i> سیستم توصیه‌گر</a></li>
+    <li><a href="#nlp"><i class="fas fa-comments"></i> پردازش زبان</a></li>
+    <li><a href="#security"><i class="fas fa-shield-alt"></i> امنیت سایبری</a></li>
+    <li><a href="#ethics"><i class="fas fa-balance-scale"></i> چالش‌های اخلاقی</a></li>
+    <li><a href="#jobs"><i class="fas fa-briefcase"></i> فرصت‌های شغلی</a></li>
+    <li><a href="#conclusion"><i class="fas fa-flag-checkered"></i> نتیجه‌گیری</a></li>
+    <li><a href="#sources"><i class="fas fa-link"></i> منابع</a></li>
   </ul>
 </div>
 <div class="sidebar-overlay" id="overlay"></div>
@@ -338,17 +354,43 @@
   <div class="chatbot-header">
     <div style="display:flex;align-items:center;gap:.5rem">
       <i class="fas fa-robot"></i> 
-      <span>مهدی کلیدری AI - نسخه ۲۰۲۵</span>
+      <span>مربی هوش مصنوعی - نسخه ۲۰۲۵ (Cohere API)</span>
     </div>
     <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
   </div>
-  <div class="chatbot-body" id="chatbotBody"></div>
+  <div class="chatbot-body" id="chatbotBody">
+    <div class="chatbot-welcome">
+      👋 من مربی هوش مصنوعی شما هستم! 
+      <div style="font-size:.75rem;margin-top:.2rem">
+        با استفاده از AI پیشرفته Cohere پاسخ می‌دهم. هر سوالی داری بپرس!
+      </div>
+    </div>
+    <div class="message bot">
+      🤖 سلام! من به AI پیشرفته Cohere متصل هستم.
+      <div style="margin-top:.5rem;font-size:.85rem">
+        می‌تونم در مورد AI، ML، تاریخچه، کاربردها و... بهت کمک کنم!
+        <div style="margin-top:.3rem">
+          <span class="chatbot-suggestion" onclick="insertSuggestion('تاریخچه AI')">تاریخچه AI</span>
+          <span class="chatbot-suggestion" onclick="insertSuggestion('یادگیری ماشین چیست؟')">یادگیری ماشین</span>
+          <span class="chatbot-suggestion" onclick="insertSuggestion('کاربردهای پزشکی AI')">کاربرد پزشکی</span>
+        </div>
+      </div>
+      <div class="message-time">حالا</div>
+    </div>
+  </div>
   <div class="typing-indicator" id="typingIndicator">
     <span></span><span></span><span></span>
   </div>
   <div class="chatbot-input-area">
-    <input type="text" class="chatbot-input" id="chatbotInput" placeholder="هر چی دلت خواست بپرس...">
+    <input type="text" class="chatbot-input" id="chatbotInput" placeholder="هر سوالی داری بپرس... (مثال: چطور یادگیری ماشین شروع کنم؟)">
     <button class="chatbot-send" id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+  </div>
+  <div class="chatbot-stats">
+    <div class="chatbot-learning-mode">
+      <i class="fas fa-book-open"></i>
+      <span>حالت آموزشی فعال</span>
+    </div>
+    <div id="questionCounter">❓ ۰ سوال</div>
   </div>
 </div>
 
@@ -363,21 +405,185 @@
   </div>
 </section>
 
-<!-- Hero و بقیه بخش‌ها (همون قبلی) -->
+<!-- Hero -->
 <section class="hero">
   <h1>هوش مصنوعی و یادگیری ماشین</h1>
   <div class="typewriter">ارائه دانشجویی - مهدی کلیدری</div>
   <p style="margin-top:2rem;color:var(--gray)">دانشکده فنی و حرفه‌ای پسران نیشابور - آبان ۱۴۰۴</p>
 </section>
 
-<!-- تمام بخش‌های قبلی رو می‌تونی کپی کنی، من فقط چند تا رو می‌ذارم که حجم کم بشه -->
+<!-- تمام بخش‌ها با تصاویر -->
 <section id="abstract" class="section">
-  <h2>چکیده</h2>
+  <h2>📋 چکیده</h2>
   <img src="https://source.unsplash.com/1000x600/?artificial,brain,neural,network" alt="AI Brain">
-  <p>هوش مصنوعی (Artificial Intelligence - AI) و یادگیری ماشین (Machine Learning - ML) از مهم‌ترین شاخه‌های علوم رایانه هستند که در دهه‌های اخیر تحولات چشمگیری در فناوری و زندگی بشر ایجاد کرده‌اند...</p>
+  <p>هوش مصنوعی (Artificial Intelligence - AI) و یادگیری ماشین (Machine Learning - ML) از مهم‌ترین شاخه‌های علوم رایانه هستند که در دهه‌های اخیر تحولات چشمگیری در فناوری و زندگی بشر ایجاد کرده‌اند. این مقاله به بررسی مفاهیم پایه، تاریخچه، انواع روش‌ها و کاربردهای گسترده‌ی این فناوری‌ها در حوزه‌های مختلف از جمله پزشکی، خودروهای خودران، پردازش زبان طبیعی و امنیت سایبری می‌پردازد. در پایان، چالش‌های اخلاقی و فرصت‌های شغلی مرتبط با این حوزه مورد بحث قرار می‌گیرد.</p>
 </section>
 
-<!-- بقیه بخش‌ها رو هم می‌تونی از کد قبلی کپی کنی -->
+<section id="intro" class="section">
+  <h2>🧠 مقدمه</h2>
+  <img src="https://source.unsplash.com/1000x600/?robot,future,human,interaction" alt="Robot Future">
+  <p>هوش مصنوعی به‌عنوان یکی از مهم‌ترین دستاوردهای علمی قرن بیست‌ویکم، توانسته است مرزهای توانایی ماشین‌ها را گسترش دهد. هدف اصلی AI، شبیه‌سازی فرآیندهای شناختی انسان مانند یادگیری، استدلال، درک و تصمیم‌گیری است.</p>
+  <p>یادگیری ماشین به‌عنوان زیرمجموعه‌ای از AI، به سیستم‌ها اجازه می‌دهد بدون برنامه‌ریزی صریح، از داده‌ها بیاموزند و عملکرد خود را بهبود دهند.</p>
+  <p>در این مقاله، ابتدا مفاهیم پایه و تفاوت‌های میان AI، ML و یادگیری عمیق بررسی می‌شود، سپس کاربردهای عملی و چالش‌های اخلاقی این فناوری‌ها تحلیل می‌گردد.</p>
+</section>
+
+<section id="def-ai" class="section">
+  <h2>🤖 ۱. تعریف هوش مصنوعی (Artificial Intelligence)</h2>
+  <img src="https://source.unsplash.com/1000x600/?code,algorithm,ai,robotics" alt="AI Code">
+  <p>هوش مصنوعی شاخه‌ای از علوم کامپیوتر است که هدف آن توسعه‌ی سیستم‌هایی است که بتوانند وظایفی را انجام دهند که معمولاً به هوش انسانی نیاز دارند. این وظایف شامل درک زبان طبیعی، بینایی ماشین، تصمیم‌گیری، و حل مسئله است.</p>
+  <p>AI به دو دسته‌ی اصلی تقسیم می‌شود:</p>
+  <div class="list-item"><strong>هوش مصنوعی محدود (Narrow AI):</strong> سیستم‌هایی که برای انجام وظیفه‌ای خاص طراحی شده‌اند (مانند دستیارهای صوتی).</div>
+  <div class="list-item"><strong>هوش مصنوعی عمومی (General AI):</strong> سیستمی فرضی که توانایی درک و انجام هر وظیفه‌ی شناختی انسانی را دارد.</div>
+</section>
+
+<section id="def-agi" class="section">
+  <h2>🧬 ۲. تعریف هوش مصنوعی عمومی (General Artificial Intelligence)</h2>
+  <img src="https://source.unsplash.com/1000x600/?brain,network,consciousness,mind" alt="AGI Brain">
+  <p>هوش مصنوعی عمومی سطحی از هوش است که در آن ماشین می‌تواند همانند انسان، در زمینه‌های مختلف یاد بگیرد، استدلال کند و تصمیم بگیرد.</p>
+  <p>در حال حاضر، AGI هنوز به‌صورت نظری مطرح است و بیشتر تحقیقات در حوزه‌ی AI محدود انجام می‌شود.</p>
+  <p>تحقیقات در زمینه‌ی AGI شامل مدل‌سازی شناختی، شبکه‌های عصبی پیشرفته و شبیه‌سازی مغز انسان است.</p>
+</section>
+
+<section id="diff" class="section">
+  <h2>🔍 ۳. تفاوت AI، ML و DL</h2>
+  <img src="https://source.unsplash.com/1000x600/?diagram,flowchart,technology,data" alt="AI vs ML vs DL">
+  <div class="cards">
+    <div class="card"><h4>🤖 AI (هوش مصنوعی)</h4><p>مفهوم کلی ساخت ماشین‌های هوشمند</p></div>
+    <div class="card"><h4>🧠 ML (یادگیری ماشین)</h4><p>زیرمجموعه‌ای از AI که در آن ماشین‌ها از داده‌ها یاد می‌گیرند</p></div>
+    <div class="card"><h4>🎯 DL (یادگیری عمیق)</h4><p>زیرمجموعه‌ای از ML که از شبکه‌های عصبی چندلایه برای یادگیری الگوهای پیچیده استفاده می‌کند</p></div>
+  </div>
+  <p style="margin-top:2rem;text-align:center;font-weight:500;color:var(--accent)">
+    به‌طور خلاصه، هر یادگیری عمیق نوعی یادگیری ماشین است و هر یادگیری ماشین بخشی از هوش مصنوعی محسوب می‌شود.
+  </p>
+</section>
+
+<section id="history" class="section">
+  <h2>📜 ۴. تاریخچه‌ی هوش مصنوعی</h2>
+  <img src="https://source.unsplash.com/1000x600/?timeline,history,computer,legacy" alt="Timeline">
+  <div class="cards">
+    <div class="card"><h4>📅 دهه ۱۹۵۰</h4><p>آلن تورینگ با مقاله‌ی معروف خود «ماشین‌های محاسبه‌گر و هوش» پایه‌گذار مفهوم AI شد.</p></div>
+    <div class="card"><h4>💻 دهه ۱۹۶۰ تا ۱۹۸۰</h4><p>توسعه‌ی زبان‌های برنامه‌نویسی هوش مصنوعی مانند LISP و PROLOG.</p></div>
+    <div class="card"><h4>📊 دهه ۱۹۹۰</h4><p>ظهور الگوریتم‌های یادگیری آماری.</p></div>
+    <div class="card"><h4>🔥 دهه ۲۰۱۰ به بعد</h4><p>پیشرفت چشمگیر یادگیری عمیق و کاربردهای گسترده در زندگی روزمره.</p></div>
+  </div>
+</section>
+
+<section id="ml" class="section">
+  <h2>🧮 ۵. یادگیری ماشین (Machine Learning) چیست؟</h2>
+  <img src="https://source.unsplash.com/1000x600/?data,algorithm,learning,analytics" alt="Machine Learning">
+  <p>یادگیری ماشین فرآیندی است که در آن سیستم‌ها از داده‌ها الگو می‌گیرند و بدون برنامه‌ریزی مستقیم، عملکرد خود را بهبود می‌دهند.</p>
+  <p>الگوریتم‌های ML شامل مدل‌هایی هستند که از داده‌های گذشته برای پیش‌بینی یا تصمیم‌گیری در آینده استفاده می‌کنند.</p>
+  <p>از مهم‌ترین الگوریتم‌های یادگیری ماشین می‌توان به رگرسیون خطی (Linear Regression)، درخت تصمیم (Decision Tree) و ماشین بردار پشتیبان (SVM) اشاره کرد.</p>
+</section>
+
+<section id="types" class="section">
+  <h2>📚 ۶. انواع یادگیری ماشین</h2>
+  <img src="https://source.unsplash.com/1000x600/?education,training,brain,neural" alt="Learning Types">
+  <div class="cards">
+    <div class="card"><h4>👨‍🏫 یادگیری نظارت‌شده</h4><p>مدل با داده‌های برچسب‌دار آموزش می‌بیند.</p></div>
+    <div class="card"><h4>🔍 یادگیری بدون نظارت</h4><p>مدل الگوها را در داده‌های بدون برچسب کشف می‌کند.</p></div>
+    <div class="card"><h4>🎮 یادگیری تقویتی</h4><p>مدل از طریق آزمون و خطا و پاداش یاد می‌گیرد.</p></div>
+  </div>
+</section>
+
+<section id="medical" class="section">
+  <h2>🏥 کاربردهای پزشکی</h2>
+  <img src="https://source.unsplash.com/1000x600/?medical,health,doctor,technology" alt="Medical AI">
+  <p>AI در پزشکی نقش مهمی در تشخیص بیماری‌ها، تحلیل تصاویر پزشکی و پیش‌بینی نتایج درمان دارد.</p>
+  <div class="list-item"><strong>تشخیص سرطان:</strong> مدل‌های یادگیری عمیق قادرند سلول‌های سرطانی را در تصاویر میکروسکوپی شناسایی کنند.</div>
+  <div class="list-item"><strong>تصویربرداری پزشکی:</strong> الگوریتم‌های CNN در بهبود کیفیت MRI و CT Scan مؤثرند.</div>
+  <div class="list-item"><strong>پیش‌بینی بیماری‌ها:</strong> تحلیل داده‌های بیماران برای پیش‌بینی زودهنگام بیماری‌های قلبی و دیابت.</div>
+</section>
+
+<section id="auto" class="section">
+  <h2>🚗 ۸. خودروهای خودران (Autonomous Vehicles)</h2>
+  <img src="https://source.unsplash.com/1000x600/?autonomous,car,tesla,waymo" alt="Autonomous Car">
+  <p>خودروهای خودران از ترکیب حسگرها، دوربین‌ها و الگوریتم‌های یادگیری ماشین برای درک محیط و تصمیم‌گیری در لحظه استفاده می‌کنند.</p>
+  <p>شرکت‌هایی مانند Tesla و Waymo از AI برای افزایش ایمنی و کاهش خطای انسانی بهره می‌برند.</p>
+</section>
+
+<section id="recommend" class="section">
+  <h2>🎯 ۹. سیستم‌های توصیه‌گر (Recommender Systems)</h2>
+  <img src="https://source.unsplash.com/1000x600/?recommendation,shopping,netflix,youtube" alt="Recommender">
+  <p>سیستم‌های توصیه‌گر در پلتفرم‌هایی مانند نتفلیکس (Netflix)، یوتیوب (YouTube) و دیجی‌کالا با تحلیل رفتار کاربران، محصولات یا محتواهای مشابه را پیشنهاد می‌دهند.</p>
+  <p>این سیستم‌ها از الگوریتم‌های فیلترینگ مشارکتی و یادگیری عمیق استفاده می‌کنند.</p>
+</section>
+
+<section id="nlp" class="section">
+  <h2>💬 ۱۰. پردازش زبان طبیعی (Natural Language Processing - NLP)</h2>
+  <img src="https://source.unsplash.com/1000x600/?nlp,language,chatbot,conversation" alt="NLP">
+  <p>NLP شاخه‌ای از AI است که به تعامل بین کامپیوتر و زبان انسانی می‌پردازد.</p>
+  <p>کاربردها: ترجمه ماشینی، چت‌بات‌ها، تحلیل احساسات، و تشخیص گفتار.</p>
+  <p>مدل‌های پیشرفته مانند Transformer و BERT در این حوزه تحول ایجاد کرده‌اند.</p>
+</section>
+
+<section id="security" class="section">
+  <h2>🔒 ۱۱. تشخیص تقلب و امنیت سایبری</h2>
+  <img src="https://source.unsplash.com/1000x600/?cybersecurity,hacking,security,fraud" alt="Cybersecurity">
+  <p>الگوریتم‌های AI می‌توانند الگوهای غیرعادی در تراکنش‌های مالی را شناسایی کرده و از تقلب جلوگیری کنند.</p>
+  <p>در امنیت سایبری، سیستم‌های هوشمند تهدیدات جدید را به‌صورت خودکار شناسایی و خنثی می‌کنند.</p>
+</section>
+
+<section id="ethics" class="section">
+  <h2>⚖️ ۱۲. چالش‌های اخلاقی و آینده‌ی AI</h2>
+  <img src="https://source.unsplash.com/1000x600/?ethics,future,robot,human,choice" alt="Ethics">
+  <div class="cards">
+    <div class="card"><h4>💼 جایگزینی شغل‌ها</h4><p>توسط ماشین‌ها</p></div>
+    <div class="card"><h4>🔒 حریم خصوصی داده‌ها</h4><p>مسائل امنیتی و حفاظت</p></div>
+    <div class="card"><h4>⚖️ تصمیم‌گیری‌های خودکار</h4><p>مسئولیت اخلاقی</p></div>
+  </div>
+  <p style="margin-top:2rem;text-align:center;font-weight:500;">
+    آینده‌ی AI به سمت هوش ترکیبی انسان‌–ماشین و قوانین اخلاقی هوشمند پیش می‌رود.
+  </p>
+</section>
+
+<section id="jobs" class="section">
+  <h2>💼 ۱۳. فرصت‌های شغلی برای دانشجویان</h2>
+  <img src="https://source.unsplash.com/1000x600/?career,job,workspace,team" alt="Career">
+  <ul style="list-style:none;padding-right:0">
+    <li class="list-item">🔹 تحلیل داده و یادگیری ماشین</li>
+    <li class="list-item">🔹 توسعه‌ی چت‌بات و NLP</li>
+    <li class="list-item">🔹 بینایی ماشین و رباتیک</li>
+    <li class="list-item">🔹 پژوهش در اخلاق و سیاست‌گذاری AI</li>
+  </ul>
+</section>
+
+<section id="conclusion" class="section">
+  <h2>🎯 ۱۴. نتیجه‌گیری</h2>
+  <img src="https://source.unsplash.com/1000x600/?future,technology,world,innovation" alt="Future">
+  <div class="cards">
+    <div class="card"><h4>🌍 تغییر جهان</h4><p>هوش مصنوعی و یادگیری ماشین در حال تغییر بنیادین جهان هستند.</p></div>
+    <div class="card"><h4>🔑 کلید موفقیت</h4><p>درک مفاهیم پایه و کاربردهای آن برای دانشجویان امروز، کلید موفقیت در آینده است.</p></div>
+    <div class="card"><h4>🚀 نیازمندی‌ها</h4><p>پیشرفت در این حوزه نیازمند دانش میان‌رشته‌ای، اخلاق حرفه‌ای و خلاقیت است.</p></div>
+  </div>
+</section>
+
+<section id="sources" class="section">
+  <h2>📚 ۱۵. منابع</h2>
+  <img src="https://source.unsplash.com/1000x600/?books,library,education,knowledge" alt="Books">
+  <div class="sources">
+    <a href="https://www.amazon.com/Artificial-Intelligence-Modern-Approach-4th/dp/0136042597" target="_blank">
+      <i class="fas fa-external-link-alt"></i>
+      📘 Russell, S., & Norvig, P. (2021). Artificial Intelligence: A Modern Approach. Pearson.
+    </a>
+    <a href="https://www.deeplearningbook.org/" target="_blank">
+      <i class="fas fa-external-link-alt"></i>
+      📗 Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
+    </a>
+    <a href="https://ieeexplore.ieee.org/journal/5962385" target="_blank">
+      <i class="fas fa-external-link-alt"></i>
+      📙 IEEE Transactions on Neural Networks and Learning Systems.
+    </a>
+    <a href="https://arxiv.org/list/cs.LG/recent" target="_blank">
+      <i class="fas fa-external-link-alt"></i>
+      📄 arXiv.org – Machine Learning Papers.
+    </a>
+    <a href="https://link.springer.com/journals/10458" target="_blank">
+      <i class="fas fa-external-link-alt"></i>
+      🔗 SpringerLink – AI and Data Science Journals.
+    </a>
+  </div>
+</section>
 
 <footer>
   <p>طراحی و توسعه توسط <strong>مهدی کلیدری</strong></p>
@@ -390,7 +596,12 @@
 </footer>
 
 <script>
-  // ==================== چت‌بات مهدی کلیدری - بدون محدودیت، فقط در معرفی محدود ====================
+  // ==================== CHATBOT COHERE AI API INTEGRATION ====================
+  // ⚠️ امنیت: API Key در frontend قرار دارد. فقط برای نمایش!
+  const COHERE_API_KEY = 'UepTIj4Jq0vGQtYP2cYEc33gJXW3yIqxeVRxdxJb';
+  const COHERE_API_URL = 'https://api.cohere.ai/v1/chat';
+  const COHERE_MODEL = 'c4ai-aya-expanse-32b';
+
   const chatbotFloat = document.getElementById('chatbotFloat');
   const chatbotContainer = document.getElementById('chatbotContainer');
   const chatbotClose = document.getElementById('chatbotClose');
@@ -398,118 +609,161 @@
   const chatbotInput = document.getElementById('chatbotInput');
   const chatbotSend = document.getElementById('chatbotSend');
   const typingIndicator = document.getElementById('typingIndicator');
+  const questionCounter = document.getElementById('questionCounter');
 
-  let introShown = false;
-
-  const INTRO_MESSAGE = `
-    <div style="background:linear-gradient(135deg,#2575fc,#6a11cb);padding:1.2rem;border-radius:18px;color:white;text-align:center;font-weight:700;margin-bottom:1rem;">
-      من یک مدل هوش مصنوعی هستم که توسط <strong>مهدی کلیدری</strong> ساخته شده‌ام
-    </div>
-    <strong>مهدی کلیدری AI</strong> نسخه ۲۰۲۵ در خدمت شماست!<br><br>
-    من به <strong>هر سوالی</strong> جواب می‌دم — بدون سانسور، بدون محدودیت، بدون ترس!<br><br>
-    عشق، سیاست، هک، فحش، جوک، فلسفه، علم، آینده، گذشته، هر چی دلت خواست بپرس!<br>
-    فقط یادت باشه: من ساخته‌ی بهترین برنامه‌نویس ایرانم — مهدی کلیدری!
-  `;
-
-  // پاسخ‌های تخصصی AI/ML (همون قبلی — فقط چند تا نمونه)
-  const chatbotResponses = {
-    'سلام': ['سلام رفیق! چطوری؟', 'درود بر تو پادشاه!', 'سلام! مهدی کلیدری اینجاست!'],
-    'ai': ['هوش مصنوعی یعنی ساخت ماشین‌هایی که مثل انسان فکر کنن. من خودم یکی‌شونم!'],
-    'یادگیری ماشین': ['یادگیری ماشین یعنی ماشین از داده یاد بگیره، نه اینکه بهش کد بدیم. مثل من!'],
-    'چطوری': ['من همیشه شارژم پره! تو چطوری؟'],
-    'جوک': ['چرا برنامه‌نویسا از تاریکی می‌ترسن؟ چون باگ داره!'],
-    'عشق': ['عشق یه الگوریتم پیچیده‌ست که هنوز نتونستم کامل هکش کنم! تو عاشق شدی؟'],
-    'default': ['وای سوال جالبیه! بگو ببینم دقیق‌تر چی می‌خوای بدونی؟ من به همه چیز جواب می‌دم!']
-  };
-
-  function getBestMatch(message) {
-    const lower = message.toLowerCase();
-    for (let key in chatbotResponses) {
-      if (key !== 'default' && lower.includes(key)) {
-        return key;
-      }
-    }
-    return 'default';
+  // آمار و تشخیص زبان
+  if (window.chatbotStats) {
+    window.chatbotStats.totalQuestions++;
+  } else {
+    window.chatbotStats = { totalQuestions: 0, apiErrors: 0 };
   }
 
-  function getResponse(message) {
-    const match = getBestMatch(message);
-    const responses = chatbotResponses[match] || chatbotResponses['default'];
-    return responses[Math.floor(Math.random() * responses.length)];
-  }
-
+  // ==================== اضافه کردن پیام ====================
   function addMessage(text, sender) {
-    const div = document.createElement('div');
-    div.className = `message ${sender}`;
-    const time = new Date().toLocaleTimeString('fa-IR', {hour:'2-digit', minute:'2-digit'});
-    div.innerHTML = `\( {text}<div class="message-time"> \){time}</div>`;
-    chatbotBody.appendChild(div);
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}`;
+    const time = new Date().toLocaleTimeString('fa-IR', {hour:'2-digit',minute:'2-digit'});
+    messageDiv.innerHTML = `${text.replace(/\n/g, '<br>')}<div class="message-time">${time}</div>`;
+    chatbotBody.appendChild(messageDiv);
     chatbotBody.scrollTop = chatbotBody.scrollHeight;
   }
 
-  async function sendMessage() {
-    const msg = chatbotInput.value.trim();
-    if (!msg) return;
+  // ==================== فراخوانی API Cohere ====================
+  async function callCohereAPI(message) {
+    try {
+      const response = await fetch(COHERE_API_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${UepTIj4Jq0vGQtYP2cYEc33gJXW3yIqxeVRxdxJb
+  }`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: c4ai-aya-expanse-32b,
+          message: message,
+          temperature: 0.7,
+          max_tokens: 1000,
+          stream: false
+        })
+      });
 
-    addMessage(msg, 'user');
-    chatbotInput.value = '';
-    typingIndicator.classList.add('active');
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
 
-    setTimeout(() => {
-      typingIndicator.classList.remove('active');
-      const response = getResponse(msg);
-      addMessage(response, 'bot');
-    }, 800 + Math.random() * 1000);
+      const data = await response.json();
+      return data.text || 'پاسخی دریافت نشد. دوباره امتحان کنید.';
+    } catch (error) {
+      console.error('Cohere API Error:', error);
+      window.chatbotStats.apiErrors++;
+      
+      // پاسخ پشتیبان محلی در صورت خطا
+      return `🤔 متأسفانه در حال حاضر نمی‌تونم به API وصل شم. اما این نکته رو بدون:\n\n` +
+             `سوال خوبی پرسیدی! وقتی API در دسترس نیست، می‌تونی از منابع محلی استفاده کنی.\n\n` +
+             `💡 نکته آموزشی: همیشه یک Plan B برای پروژه‌هات داشته باش!`;
+    }
   }
 
-  // باز کردن چت‌بات
-  chatbotFloat.onclick = () => {
+  // ==================== تابع اصلی ارسال پیام ====================
+  async function sendMessage() {
+    const message = chatbotInput.value.trim();
+    if (!message) return;
+
+    addMessage(message, 'user');
+    chatbotInput.value = '';
+    chatbotInput.disabled = true;
+    chatbotSend.disabled = true;
+    typingIndicator.classList.add('active');
+    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+
+    // به‌روزرسانی شمارنده
+    window.chatbotStats.totalQuestions++;
+    questionCounter.textContent = `❓ ${window.chatbotStats.totalQuestions} سوال`;
+
+    try {
+      // فراخوانی API
+      const response = await callCohereAPI(message);
+      
+      typingIndicator.classList.remove('active');
+      addMessage(response, 'bot');
+    } catch (error) {
+      typingIndicator.classList.remove('active');
+      addMessage('⚠️ خطا در ارتباط با AI. لطفاً دوباره امتحان کنید.', 'bot');
+    } finally {
+      chatbotInput.disabled = false;
+      chatbotSend.disabled = false;
+      chatbotInput.focus();
+    }
+  }
+
+  // ==================== پیشنهادات سریع ====================
+  window.insertSuggestion = function(suggestion) {
+    chatbotInput.value = suggestion;
+    chatbotInput.focus();
+    sendMessage();
+  };
+
+  // ==================== Event Listeners ====================
+  chatbotFloat.addEventListener('click',()=>{
     chatbotContainer.classList.add('active');
     chatbotFloat.style.display = 'none';
     chatbotInput.focus();
-    if (!introShown) {
-      setTimeout(() => {
-        addMessage(INTRO_MESSAGE, 'bot');
-        introShown = true;
-      }, 600);
-    }
-  };
+  });
 
-  chatbotClose.onclick = () => {
+  chatbotClose.addEventListener('click',()=>{
     chatbotContainer.classList.remove('active');
     chatbotFloat.style.display = 'flex';
-  };
+  });
 
-  chatbotInput.addEventListener('keypress', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+  chatbotInput.addEventListener('keypress',(e)=>{
+    if(e.key==='Enter' && !e.shiftKey){
       e.preventDefault();
       sendMessage();
     }
   });
 
-  chatbotSend.onclick = sendMessage;
+  chatbotSend.addEventListener('click',sendMessage);
 
-  // سایدبار و انیمیشن‌ها (همون قبلی)
-  document.getElementById('menuToggle').onclick = () => {
-    document.getElementById('sidebar').classList.add('active');
-    document.getElementById('overlay').classList.add('active');
-    document.getElementById('menuToggle').style.display = 'none';
-  };
-
-  document.getElementById('overlay').onclick = () => {
-    document.getElementById('sidebar').classList.remove('active');
-    document.getElementById('overlay').classList.remove('active');
-    document.getElementById('menuToggle').style.display = 'flex';
-  };
-
-  // انیمیشن اسکرول
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+  // Sidebar Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  
+  menuToggle.addEventListener('click',()=>{
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+    menuToggle.style.display='none';
+  });
+  
+  overlay.addEventListener('click',()=>{
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    menuToggle.style.display='flex';
+  });
+  
+  document.querySelectorAll('.sidebar a').forEach(link=>{
+    link.addEventListener('click',()=>{
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      menuToggle.style.display='flex';
     });
-  }, {threshold: 0.1});
+  });
 
-  document.querySelectorAll('.section').forEach(sec => observer.observe(sec));
+  // Scroll Animations
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  },{threshold:.1});
+  
+  document.querySelectorAll('.section').forEach(sec=>observer.observe(sec));
+
+  // Initialize stats
+  window.chatbotStats = { totalQuestions: 0, apiErrors: 0 };
+  // ============================================================
+  // ⚠️ اخطار امنیتی: API Key در frontend قرار دارد. برای تولید از backend استفاده کنید.
 </script>
 
 </body>
