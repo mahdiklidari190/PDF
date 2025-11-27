@@ -378,22 +378,22 @@
   <div class="chatbot-header">
     <div style="display:flex;align-items:center;gap:.5rem">
       <i class="fas fa-robot"></i> 
-      <span>مربی هوش مصنوعی - Cerebras AI</span>
+      <span>هوش مصنوعی - نسخه بتا</span>
     </div>
     <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
   </div>
   <div class="chatbot-body" id="chatbotBody">
     <div class="chatbot-welcome">
-      👋 من مربی هوش مصنوعی شما هستم! 
+      👋 من هوش مصنوعی شما هستم! 
       <div style="font-size:.75rem;margin-top:.2rem">
-        با Cerebras AI مستقیماً ارتباط دارم. هر سوالی داری بپرس!
+        با  AI مستقیماً ارتباط دارم. هر سوالی داری بپرس!
       </div>
     </div>
     <div class="message bot">
       <div class="message-actions">
         <button class="copy-btn" title="کپی پیام"><i class="fas fa-copy"></i></button>
       </div>
-      🤖 سلام! من به Cerebras AI متصل هستم و آماده پاسخگویی به سوالات شما.
+      🤖 سلام! من به  AI متصل هستم و آماده پاسخگویی به سوالات شما.
       <div style="margin-top:.5rem;font-size:.85rem">
         می‌تونم در مورد AI، ML، کاربردها، تاریخچه و... کمک کنم!
         <div style="margin-top:.3rem">
@@ -415,13 +415,13 @@
   <div class="chatbot-stats">
     <div class="chatbot-learning-mode">
       <i class="fas fa-book-open"></i>
-      <span>حالت آموزشی فعال</span>
+      <span>حالت بتا فعال</span>
     </div>
     <div class="connection-status">
       <span class="status-dot connected" id="statusDot"></span>
       <span id="connectionStatus">متصل</span>
     </div>
-    <div id="questionCounter">❓ ۰ سوال</div>
+    <div id="questionCounter">توکن استفاده شده 🪙</div>
   </div>
 </div>
 
@@ -686,7 +686,7 @@
 
   // تابع به‌روزرسانی شمارنده سوالات
   function updateCounter() {
-    questionCounter.textContent = `❓ ${questionCount} سوال`;
+    questionCounter.textContent = `🪙${questionCount} توکن استفاده شده`;
   }
 
   // تابع به‌روزرسانی وضعیت اتصال
