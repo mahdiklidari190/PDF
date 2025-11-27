@@ -585,8 +585,9 @@
   
   document.querySelectorAll('.section').forEach(sec=>observer.observe(sec));
 
-  // Chatbot Logic
+  // Chatbot Logic - DIRECT COHERE API
   const API_KEY = 'UepTIj4Jq0vGQtYP2cYEc33gJXW3yIqxeVRxdxJb';
+  const MODEL = 'c4ai-aya-expanse-32b';
   const API_URL = 'https://api.cohere.ai/v1/chat';
   
   const chatbotFloat = document.getElementById('chatbotFloat');
@@ -614,7 +615,7 @@
   // Send Message
   async function sendMessage() {
     const message = chatbotInput.value.trim();
-    if(!message) return;
+    if (!message) return;
 
     // Add user message
     addMessage(message, 'user');
@@ -627,7 +628,7 @@
     chatbotBody.scrollTop = chatbotBody.scrollHeight;
 
     try {
-      // Call Cohere API
+      // Call Cohere API directly
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -636,9 +637,9 @@
         },
         body: JSON.stringify({
           message: message,
-          model: 'command',
-          temperature: 0.7,
-          chat_history: chatHistory
+          model: MODEL,
+          chat_history: chatHistory,
+          temperature: 0.7
         })
       });
 
@@ -647,7 +648,7 @@
       // Hide typing indicator
       typingIndicator.classList.remove('active');
       
-      if(data.text) {
+      if (data.text) {
         // Add bot message
         addMessage(data.text, 'bot');
         // Update history
@@ -656,13 +657,13 @@
           {role: 'CHATBOT', message: data.text}
         );
       } else {
-        addMessage('متأسفانه خطایی رخ داد. لطفاً دوباره تلاش کنید.', 'bot');
+        addMessage('متأسفانه پاسخی دریافت نشد.', 'bot');
       }
 
     } catch (error) {
       console.error('Error:', error);
       typingIndicator.classList.remove('active');
-      addMessage('خطا در ارتباط با سرور. لطفاً اینترنت خود را بررسی کنید.', 'bot');
+      addMessage('خطا در ارتباط با API Cohere.', 'bot');
     } finally {
       chatbotInput.disabled = false;
       chatbotSend.disabled = false;
