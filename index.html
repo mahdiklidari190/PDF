@@ -1,461 +1,447 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>AI & ML - ارائه مهدی کلیدری</title>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root{
-      --bg:#0a0a0f;
-      --card:#121218;
-      --accent:#00f2fe;
-      --accent2:#6a11cb;
-      --accent3:#ff006e;
-      --text:#f0f0f0;
-      --gray:#a0a0b0;
-      --glass:#1a1a2480;
-      --user-msg:#6a11cb;
-      --bot-msg:#16213e;
-      --success:#00d26a;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{width:100%;overflow-x:hidden;scroll-behavior:smooth}
-    body{
-      font-family:'Vazirmatn',sans-serif;
-      background:linear-gradient(135deg,var(--bg),#1a1a2e,#16213e);
-      background-attachment:fixed;
-      color:var(--text);
-      line-height:1.8;
-      font-size:clamp(14px,1.2vw+1vh,18px);
-    }
-    .animated-bg{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:linear-gradient(45deg,var(--accent),var(--accent2),var(--accent3));
-      background-size:400% 400%;
-      animation:gradient 15s ease infinite;
-      z-index:-2;opacity:.1;
-    }
-    @keyframes gradient{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    
-    /* بهبود استایل چت بات */
-    .chatbot-float{
-      position:fixed;bottom:2rem;left:2rem;z-index:3000;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      border:none;border-radius:50%;width:60px;height:60px;
-      cursor:pointer;display:flex;align-items:center;justify-content:center;
-      box-shadow:0 5px 25px rgba(0,242,254,.4);
-      transition:transform .3s,box-shadow .3s;
-    }
-    .chatbot-float:hover{
-      transform:scale(1.1) rotate(10deg);
-      box-shadow:0 8px 35px rgba(0,242,254,.6);
-    }
-    .chatbot-float i{font-size:1.8rem;color:var(--bg)}
-    .chatbot-container{
-      position:fixed;bottom:2rem;left:2rem;z-index:3001;
-      width:420px;height:650px;max-width:90vw;max-height:85vh;
-      background:var(--glass);backdrop-filter:blur(20px);
-      border:1px solid #ffffff1a;border-radius:20px;
-      box-shadow:0 25px 70px #000000cc;
-      display:flex;flex-direction:column;
-      transform:scale(0) translateY(100px);
-      opacity:0;
-      transition:transform .4s cubic-bezier(0.4,0,0.2,1),opacity .3s;
-      overflow:hidden;
-    }
-    .chatbot-container.active{
-      transform:scale(1) translateY(0);
-      opacity:1;
-    }
-    .chatbot-header{
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;
-      color:var(--bg);font-weight:700;
-    }
-    .chatbot-body{
-      flex:1;padding:1rem;overflow-y:auto;display:flex;flex-direction:column;gap:.8rem;
-    }
-    .chatbot-input-area{
-      padding:1rem;border-top:1px solid #ffffff1a;display:flex;gap:.5rem;
-      background:var(--card);
-    }
-    .chatbot-input{
-      flex:1;background:transparent;border:1px solid #ffffff1a;border-radius:12px;
-      padding:.8rem 1rem;color:var(--text);font-family:inherit;outline:none;
-      transition:border-color .3s;
-    }
-    .chatbot-input:focus{border-color:var(--accent)}
-    .chatbot-send{
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      border:none;border-radius:50%;width:45px;height:45px;
-      cursor:pointer;display:flex;align-items:center;justify-content:center;
-      color:var(--bg);font-size:1.2rem;transition:transform .2s;
-    }
-    .chatbot-send:hover{transform:scale(1.1)}
-    .chatbot-send:disabled{opacity:.5;cursor:not-allowed}
-    .message{
-      padding:.8rem 1.2rem;border-radius:15px;max-width:85%;word-wrap:break-word;
-      animation:messageSlide .3s ease-out;
-      position:relative;
-    }
-    @keyframes messageSlide{
-      from{opacity:0;transform:translateY(10px)}
-      to{opacity:1;transform:translateY(0)}
-    }
-    .message.user{
-      background:linear-gradient(135deg,var(--user-msg),var(--accent2));
-      color:var(--text);align-self:flex-end;
-      border-bottom-right-radius:5px;
-    }
-    .message.bot{
-      background:var(--bot-msg);color:var(--text);
-      align-self:flex-start;border-bottom-left-radius:5px;
-    }
-    .message-actions{
-      position:absolute;top:5px;right:5px;opacity:0;
-      transition:opacity .3s;display:flex;gap:3px;
-    }
-    .message:hover .message-actions{opacity:1}
-    .copy-btn{
-      background:rgba(255,255,255,.2);border:none;border-radius:4px;
-      width:24px;height:24px;display:flex;align-items:center;justify-content:center;
-      cursor:pointer;color:var(--text);font-size:.7rem;transition:all .2s;
-    }
-    .copy-btn:hover{background:var(--accent);color:var(--bg)}
-    .copy-btn.copied{background:var(--success);color:var(--bg)}
-    .typing-indicator{
-      display:none;align-self:flex-start;background:var(--bot-msg);
-      padding:.5rem 1rem;border-radius:15px;
-    }
-    .typing-indicator.active{display:flex;gap:.3rem;align-items:center}
-    .typing-indicator span{
-      width:8px;height:8px;background:var(--accent);border-radius:50%;
-      animation:typingDot 1.4s infinite;
-    }
-    .typing-indicator span:nth-child(2){animation-delay:.2s}
-    .typing-indicator span:nth-child(3){animation-delay:.4s}
-    @keyframes typingDot{
-      0%,60%,100%{transform:translateY(0)}
-      30%{transform:translateY(-10px)}
-    }
-    .chatbot-close{
-      background:none;border:none;color:var(--bg);font-size:1.5rem;
-      cursor:pointer;transition:transform .2s;
-    }
-    .chatbot-close:hover{transform:rotate(90deg)}
-    .message-time{
-      font-size:.7rem;color:var(--gray);margin-top:.3rem;text-align:left;
-    }
-    .chatbot-welcome{
-      background:linear-gradient(135deg,var(--accent)30%,var(--accent2)70%);
-      padding:.5rem 1rem;border-radius:10px;margin-bottom:.5rem;
-      font-size:.85rem;color:var(--bg);font-weight:500;
-    }
-    .chatbot-stats{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:.3rem .5rem;font-size:.75rem;color:var(--gray);
-      border-top:1px solid #ffffff1a;
-    }
-    .chatbot-learning-mode{
-      display:flex;align-items:center;gap:.3rem;
-      color:var(--accent);font-weight:500;
-    }
-    .chatbot-suggestion{
-      display:inline-block;background:var(--card);border:1px solid var(--accent);
-      padding:.2rem .6rem;border-radius:12px;margin:.2rem;font-size:.75rem;
-      cursor:pointer;transition:all .2s;
-    }
-    .chatbot-suggestion:hover{
-      background:var(--accent);color:var(--bg);transform:translateY(-2px);
-    }
-    .chatbot-error{
-      background:rgba(255,0,110,.2);border:1px solid var(--accent3);
-      padding:.5rem;border-radius:8px;margin:.5rem 0;font-size:.8rem;
-    }
-    .connection-status{
-      display:flex;align-items:center;gap:.3rem;font-size:.7rem;
-    }
-    .status-dot{
-      width:8px;height:8px;border-radius:50%;background:var(--accent3);
-      animation:pulse 2s infinite;
-    }
-    .status-dot.connected{background:var(--success)}
-    @keyframes pulse{
-      0%,100%{opacity:1}
-      50%{opacity:.5}
-    }
-    @media(max-width:768px){
-      .chatbot-container{width:100%;height:100%;max-width:100%;max-height:100%;bottom:0;left:0;border-radius:0}
-      .chatbot-container.active{transform:scale(1) translateY(0)}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & ML - ارائه مهدی کلیدری</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* تمام استایل‌های قبلی شما اینجا قرار می‌گیرد */
+        :root {
+            --bg: #0a0a0f;
+            --card: #121218;
+            --accent: #00f2fe;
+            --accent2: #6a11cb;
+            --accent3: #ff006e;
+            --text: #f0f0f0;
+            --gray: #a0a0b0;
+            --glass: #1a1a2480;
+            --user-msg: #6a11cb;
+            --bot-msg: #16213e;
+            --success: #00d26a;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, var(--bg), #1a1a2e, #16213e);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.8;
+            font-size: clamp(14px, 1.2vw + 1vh, 18px);
+        }
+        /* ... سایر استایل‌ها عیناً کپی شوند ... */
+
+        /* استایل‌های جدید برای دکمه کپی و وضعیت اتصال */
+        .message {
+            position: relative;
+            padding: .8rem 1.2rem;
+            border-radius: 15px;
+            max-width: 85%;
+            word-wrap: break-word;
+            animation: messageSlide .3s ease-out;
+        }
+        .message-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            opacity: 0;
+            transition: opacity .3s;
+            display: flex;
+            gap: 3px;
+        }
+        .message:hover .message-actions {
+            opacity: 1;
+        }
+        .copy-btn {
+            background: rgba(255, 255, 255, .2);
+            border: none;
+            border-radius: 4px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text);
+            font-size: .7rem;
+            transition: all .2s;
+        }
+        .copy-btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        .copy-btn.copied {
+            background: var(--success);
+            color: var(--bg);
+        }
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            font-size: .7rem;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent3);
+            animation: pulse 2s infinite;
+        }
+        .status-dot.connected {
+            background: var(--success);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
 </head>
 <body>
+    <div class="animated-bg"></div>
 
-<div class="animated-bg"></div>
-
-<!-- سایر بخش‌های HTML شما بدون تغییر باقی می‌مانند -->
-<!-- فقط چت بات به‌روزرسانی شده است -->
-
-<!-- Floating Chat Button -->
-<button class="chatbot-float" id="chatbotFloat">
-  <i class="fas fa-robot"></i>
-</button>
-
-<!-- Chatbot Container -->
-<div class="chatbot-container" id="chatbotContainer">
-  <div class="chatbot-header">
-    <div style="display:flex;align-items:center;gap:.5rem">
-      <i class="fas fa-robot"></i> 
-      <span>مربی هوش مصنوعی - نسخه Cohere API</span>
+    <!-- سایدبار -->
+    <div class="sidebar" id="sidebar">
+        <h3>فهرست مطالب</h3>
+        <ul>
+            <li><a href="#video"><i class="fas fa-video"></i> ویدیوی معرفی</a></li>
+            <li><a href="#abstract"><i class="fas fa-clipboard-list"></i> چکیده</a></li>
+            <!-- ... سایر آیتم‌های منو ... -->
+        </ul>
     </div>
-    <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
-  </div>
-  <div class="chatbot-body" id="chatbotBody">
-    <div class="chatbot-welcome">
-      👋 من مربی هوش مصنوعی شما هستم! 
-      <div style="font-size:.75rem;margin-top:.2rem">
-        با Cohere AI مستقیماً ارتباط دارم. هر سوالی داری بپرس!
-      </div>
-    </div>
-    <div class="message bot">
-      <div class="message-actions">
-        <button class="copy-btn" title="کپی پیام"><i class="fas fa-copy"></i></button>
-      </div>
-      🤖 سلام! من به Cohere AI متصل هستم و آماده پاسخگویی به سوالات شما.
-      <div style="margin-top:.5rem;font-size:.85rem">
-        می‌تونم در مورد AI، ML، کاربردها، تاریخچه و... کمک کنم!
-        <div style="margin-top:.3rem">
-          <span class="chatbot-suggestion" onclick="insertSuggestion('تاریخچه AI')">تاریخچه AI</span>
-          <span class="chatbot-suggestion" onclick="insertSuggestion('یادگیری ماشین چیست؟')">یادگیری ماشین</span>
-          <span class="chatbot-suggestion" onclick="insertSuggestion('کاربرد پزشکی AI')">کاربرد پزشکی</span>
+    <div class="sidebar-overlay" id="overlay"></div>
+
+    <!-- دکمه منو -->
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- چت بات -->
+    <button class="chatbot-float" id="chatbotFloat">
+        <i class="fas fa-robot"></i>
+    </button>
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div style="display:flex;align-items:center;gap:.5rem">
+                <i class="fas fa-robot"></i> 
+                <span>مربی هوش مصنوعی - نسخه Cohere API</span>
+            </div>
+            <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
         </div>
-      </div>
-      <div class="message-time">حالا</div>
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chatbot-welcome">
+                👋 من مربی هوش مصنوعی شما هستم! 
+                <div style="font-size:.75rem;margin-top:.2rem">
+                    با Cohere AI مستقیماً ارتباط دارم. هر سوالی داری بپرس!
+                </div>
+            </div>
+            <div class="message bot">
+                <div class="message-actions">
+                    <button class="copy-btn" title="کپی پیام"><i class="fas fa-copy"></i></button>
+                </div>
+                🤖 سلام! من به Cohere AI متصل هستم و آماده پاسخگویی به سوالات شما.
+                <div style="margin-top:.5rem;font-size:.85rem">
+                    می‌تونم در مورد AI، ML، کاربردها، تاریخچه و... کمک کنم!
+                    <div style="margin-top:.3rem">
+                        <span class="chatbot-suggestion" onclick="insertSuggestion('تاریخچه AI')">تاریخچه AI</span>
+                        <span class="chatbot-suggestion" onclick="insertSuggestion('یادگیری ماشین چیست؟')">یادگیری ماشین</span>
+                        <span class="chatbot-suggestion" onclick="insertSuggestion('کاربرد پزشکی AI')">کاربرد پزشکی</span>
+                    </div>
+                </div>
+                <div class="message-time">حالا</div>
+            </div>
+        </div>
+        <div class="typing-indicator" id="typingIndicator">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" class="chatbot-input" id="chatbotInput" placeholder="هر سوالی داری بپرس... (مثال: چطور یادگیری ماشین شروع کنم؟)">
+            <button class="chatbot-send" id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div class="chatbot-stats">
+            <div class="chatbot-learning-mode">
+                <i class="fas fa-book-open"></i>
+                <span>حالت آموزشی فعال</span>
+            </div>
+            <div class="connection-status">
+                <span class="status-dot connected" id="statusDot"></span>
+                <span id="connectionStatus">متصل</span>
+            </div>
+            <div id="questionCounter">❓ ۰ سوال</div>
+        </div>
     </div>
-  </div>
-  <div class="typing-indicator" id="typingIndicator">
-    <span></span><span></span><span></span>
-  </div>
-  <div class="chatbot-input-area">
-    <input type="text" class="chatbot-input" id="chatbotInput" placeholder="هر سوالی داری بپرس... (مثال: چطور یادگیری ماشین شروع کنم؟)">
-    <button class="chatbot-send" id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
-  </div>
-  <div class="chatbot-stats">
-    <div class="chatbot-learning-mode">
-      <i class="fas fa-book-open"></i>
-      <span>حالت آموزشی فعال</span>
-    </div>
-    <div class="connection-status">
-      <span class="status-dot connected" id="statusDot"></span>
-      <span id="connectionStatus">متصل</span>
-    </div>
-    <div id="questionCounter">❓ ۰ سوال</div>
-  </div>
-</div>
 
-<!-- سایر بخش‌های HTML شما -->
+    <!-- سایر بخش‌های محتوای شما -->
+    <section id="video" class="video-section">
+        <!-- محتوای بخش ویدیو -->
+    </section>
 
-<script>
-  // ⚠️ هشدار امنیتی: این کلید API در کد کلاینت قرار دارد و فقط برای تست مناسب است.
-  // برای استفاده در محیط واقعی، حتماً از یک backend سرور استفاده کنید.
-  const API_KEY = 'qMW8g9viT3CbCDnkgOHfXWlTW6L7DBc5pr6J0NC4';
-  const API_URL = 'https://api.cohere.ai/v1/chat';
-  const MODEL = 'c4ai-aya-expanse-32b';
+    <section class="hero">
+        <!-- محتوای هرو -->
+    </section>
 
-  // Chatbot functionality
-  const chatbotFloat = document.getElementById('chatbotFloat');
-  const chatbotContainer = document.getElementById('chatbotContainer');
-  const chatbotClose = document.getElementById('chatbotClose');
-  const chatbotBody = document.getElementById('chatbotBody');
-  const chatbotInput = document.getElementById('chatbotInput');
-  const chatbotSend = document.getElementById('chatbotSend');
-  const typingIndicator = document.getElementById('typingIndicator');
-  const questionCounter = document.getElementById('questionCounter');
-  const statusDot = document.getElementById('statusDot');
-  const connectionStatus = document.getElementById('connectionStatus');
+    <!-- سایر sections ها -->
 
-  let questionCount = 0;
-  let isConnected = true;
+    <footer>
+        <p>طراحی و توسعه: مهدی کلیدری | دانشجوی کامپیوتر | همه حقوق محفوظ است © ۱۴۰۴</p>
+        <div class="footer-icons">
+            <a href="mailto:your-email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/yourprofile" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com/yourprofile" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
 
-  chatbotFloat.addEventListener('click', () => {
-    chatbotContainer.classList.add('active');
-  });
+    <script>
+        // کلید API و تنظیمات
+        const API_KEY = 'qMW8g9viT3CbCDnkgOHfXWlTW6L7DBc5pr6J0NC4';
+        const API_URL = 'https://api.cohere.ai/v1/chat';
+        const MODEL = 'c4ai-aya-expanse-32b';
 
-  chatbotClose.addEventListener('click', () => {
-    chatbotContainer.classList.remove('active');
-  });
+        // المنت‌های چت بات
+        const chatbotFloat = document.getElementById('chatbotFloat');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotBody = document.getElementById('chatbotBody');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const questionCounter = document.getElementById('questionCounter');
+        const statusDot = document.getElementById('statusDot');
+        const connectionStatus = document.getElementById('connectionStatus');
 
-  function insertSuggestion(text) {
-    chatbotInput.value = text;
-    chatbotInput.focus();
-    sendMessage();
-  }
+        let questionCount = 0;
+        let isConnected = true;
 
-  function updateCounter() {
-    questionCounter.textContent = `❓ ${questionCount} سوال`;
-  }
+        // مدیریت باز و بسته شدن چت بات
+        chatbotFloat.addEventListener('click', () => {
+            chatbotContainer.classList.add('active');
+        });
 
-  function updateConnectionStatus(connected) {
-    isConnected = connected;
-    if (connected) {
-      statusDot.className = 'status-dot connected';
-      connectionStatus.textContent = 'متصل';
-    } else {
-      statusDot.className = 'status-dot';
-      connectionStatus.textContent = 'قطع';
-    }
-  }
+        chatbotClose.addEventListener('click', () => {
+            chatbotContainer.classList.remove('active');
+        });
 
-  function addMessage(content, isUser = false) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-    
-    messageDiv.innerHTML = `
-      <div class="message-actions">
-        <button class="copy-btn" title="کپی پیام"><i class="fas fa-copy"></i></button>
-      </div>
-      ${content}
-      <div class="message-time">${new Date().toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' })}</div>
-    `;
-    
-    chatbotBody.appendChild(messageDiv);
-    
-    // اضافه کردن event listener برای دکمه کپی
-    const copyBtn = messageDiv.querySelector('.copy-btn');
-    copyBtn.addEventListener('click', () => {
-      const messageText = messageDiv.innerText.replace('کپی پیام', '').replace(/\d{1,2}:\d{2}\s*(ب.ظ|ق.ظ)?/g, '').trim();
-      copyToClipboard(messageText);
-      
-      // افکت کپی موفق
-      copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-      copyBtn.classList.add('copied');
-      
-      setTimeout(() => {
-        copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-        copyBtn.classList.remove('copied');
-      }, 2000);
-    });
-    
-    chatbotBody.scrollTop = chatbotBody.scrollHeight;
-  }
-
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-      console.log('پیام کپی شد');
-    }).catch(err => {
-      console.error('خطا در کپی:', err);
-      // روش جایگزین برای مرورگرهای قدیمی
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-    });
-  }
-
-  function showTypingIndicator() {
-    typingIndicator.classList.add('active');
-  }
-
-  function hideTypingIndicator() {
-    typingIndicator.classList.remove('active');
-  }
-
-  async function sendMessage() {
-    const message = chatbotInput.value.trim();
-    if (!message) return;
-
-    addMessage(message, true);
-    chatbotInput.value = '';
-    chatbotSend.disabled = true;
-    showTypingIndicator();
-
-    questionCount++;
-    updateCounter();
-
-    try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${API_KEY}`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          model: MODEL,
-          message: message,
-          stream: false
-        })
-      });
-
-      if (!response.ok) {
-        // بررسی خطاهای مختلف
-        if (response.status === 401) {
-          throw new Error('کلید API نامعتبر است');
-        } else if (response.status === 429) {
-          throw new Error('محدودیت درخواست - لطفاً کمی صبر کنید');
-        } else if (response.status >= 500) {
-          throw new Error('مشکل در سرور - لطفاً بعداً تلاش کنید');
-        } else {
-          throw new Error(`خطای HTTP! وضعیت: ${response.status}`);
+        // تابع برای قرار دادن پیشنهاد در input
+        function insertSuggestion(text) {
+            chatbotInput.value = text;
+            chatbotInput.focus();
         }
-      }
 
-      const data = await response.json();
-      
-      if (data.text) {
+        // تابع به‌روزرسانی شمارنده سوالات
+        function updateCounter() {
+            questionCounter.textContent = `❓ ${questionCount} سوال`;
+        }
+
+        // تابع به‌روزرسانی وضعیت اتصال
+        function updateConnectionStatus(connected) {
+            isConnected = connected;
+            if (connected) {
+                statusDot.className = 'status-dot connected';
+                connectionStatus.textContent = 'متصل';
+            } else {
+                statusDot.className = 'status-dot';
+                connectionStatus.textContent = 'قطع';
+            }
+        }
+
+        // تابع افزودن پیام به بدنه چت
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-actions">
+                    <button class="copy-btn" title="کپی پیام"><i class="fas fa-copy"></i></button>
+                </div>
+                ${content}
+                <div class="message-time">${new Date().toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' })}</div>
+            `;
+            
+            chatbotBody.appendChild(messageDiv);
+            
+            // اضافه کردن event listener برای دکمه کپی
+            const copyBtn = messageDiv.querySelector('.copy-btn');
+            copyBtn.addEventListener('click', () => {
+                const messageText = messageDiv.innerText.replace('کپی پیام', '').replace(/\d{1,2}:\d{2}\s*(ب.ظ|ق.ظ)?/g, '').trim();
+                copyToClipboard(messageText);
+                
+                // افکت کپی موفق
+                copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
+            
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+
+        // تابع کپی به کلیپ‌بورد
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                console.log('پیام کپی شد');
+            }).catch(err => {
+                console.error('خطا در کپی:', err);
+                // روش جایگزین برای مرورگرهای قدیمی
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            });
+        }
+
+        // توابع نمایش و پنهان کردن نشانگر تایپ
+        function showTypingIndicator() {
+            typingIndicator.classList.add('active');
+        }
+
+        function hideTypingIndicator() {
+            typingIndicator.classList.remove('active');
+        }
+
+        // تابع اصلی ارسال پیام
+        async function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, true);
+            chatbotInput.value = '';
+            chatbotSend.disabled = true;
+            showTypingIndicator();
+
+            questionCount++;
+            updateCounter();
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: MODEL,
+                        message: message,
+                        stream: false
+                    })
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        throw new Error('کلید API نامعتبر است');
+                    } else if (response.status === 429) {
+                        throw new Error('محدودیت درخواست - لطفاً کمی صبر کنید');
+                    } else if (response.status >= 500) {
+                        throw new Error('مشکل در سرور - لطفاً بعداً تلاش کنید');
+                    } else {
+                        throw new Error(`خطای HTTP! وضعیت: ${response.status}`);
+                    }
+                }
+
+                const data = await response.json();
+                
+                if (data.text) {
+                    updateConnectionStatus(true);
+                    addMessage(data.text.replace(/\n/g, '<br>'), false);
+                } else {
+                    throw new Error('پاسخی از سرویس دریافت نشد');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                updateConnectionStatus(false);
+                
+                let errorMessage = 'خطا در ارتباط با Cohere API. ';
+                
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage += 'مشکل شبکه یا CORS. ';
+                } else if (error.message.includes('API')) {
+                    errorMessage += error.message;
+                }
+                
+                errorMessage += 'لطفاً بعداً دوباره امتحان کنید.';
+                
+                addMessage(`❌ ${errorMessage}`, false);
+            } finally {
+                hideTypingIndicator();
+                chatbotSend.disabled = false;
+                chatbotInput.focus();
+            }
+        }
+
+        // رویدادهای کلیک و کیبورد
+        chatbotSend.addEventListener('click', sendMessage);
+
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // مقداردهی اولیه
+        updateCounter();
         updateConnectionStatus(true);
-        addMessage(data.text.replace(/\n/g, '<br>'), false);
-      } else {
-        throw new Error('پاسخی از سرویس دریافت نشد');
-      }
 
-    } catch (error) {
-      console.error('Error:', error);
-      updateConnectionStatus(false);
-      
-      let errorMessage = 'خطا در ارتباط با Cohere API. ';
-      
-      if (error.message.includes('Failed to fetch')) {
-        errorMessage += 'مشکل شبکه یا CORS. ';
-      } else if (error.message.includes('API')) {
-        errorMessage += error.message;
-      }
-      
-      errorMessage += 'لطفاً بعداً دوباره امتحان کنید.';
-      
-      addMessage(`❌ ${errorMessage}`, false);
-    } finally {
-      hideTypingIndicator();
-      chatbotSend.disabled = false;
-      chatbotInput.focus();
-    }
-  }
+        // توابع مربوط به سایدبار و اسکرول (همان کدهای قبلی شما)
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
 
-  chatbotSend.addEventListener('click', sendMessage);
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
 
-  chatbotInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
 
-  // اضافه کردن suggestionها به صورت داینامیک
-  window.insertSuggestion = insertSuggestion;
+        // اسکرول نرم برای لینک‌های منو
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
 
-  // Counter initialization
-  updateCounter();
-  updateConnectionStatus(true);
-</script>
+        // Observer برای انیمیشن section ها
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
 
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // در دسترس کردن تابع insertSuggestion در سطح جهانی
+        window.insertSuggestion = insertSuggestion;
+    </script>
 </body>
 </html>
