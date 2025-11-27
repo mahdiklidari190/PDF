@@ -79,7 +79,7 @@
     th{background:var(--accent);color:var(--bg);font-weight:700}
     tr:hover{background:rgba(0,242,254,.1)}
 
-    /* استایل‌های چت بات ساده */
+    /* استایل‌های چت بات */
     .chatbot-float{
       position:fixed;bottom:2rem;left:2rem;z-index:3000;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
@@ -210,6 +210,18 @@
     .chatbot-suggestion:hover{
       background:var(--accent);color:var(--bg);transform:translateY(-2px);
     }
+    .connection-status{
+      display:flex;align-items:center;gap:.3rem;font-size:.7rem;
+    }
+    .status-dot{
+      width:8px;height:8px;border-radius:50%;background:var(--accent3);
+      animation:pulse 2s infinite;
+    }
+    .status-dot.connected{background:var(--success)}
+    @keyframes pulse{
+      0%,100%{opacity:1}
+      50%{opacity:.5}
+    }
     @media(max-width:768px){
       .chatbot-container{width:100%;height:100%;max-width:100%;max-height:100%;bottom:0;left:0;border-radius:0}
       .chatbot-container.active{transform:scale(1) translateY(0)}
@@ -252,7 +264,7 @@
   <div class="chatbot-header">
     <div style="display:flex;align-items:center;gap:.5rem">
       <i class="fas fa-robot"></i> 
-      <span>مربی هوش مصنوعی</span>
+      <span>مربی هوش مصنوعی - Cerebras AI</span>
     </div>
     <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
   </div>
@@ -260,16 +272,16 @@
     <div class="chatbot-welcome">
       👋 من مربی هوش مصنوعی شما هستم! 
       <div style="font-size:.75rem;margin-top:.2rem">
-        می‌تونم در مورد هوش مصنوعی و یادگیری ماشین بهتون کمک کنم
+        با Cerebras AI مستقیماً ارتباط دارم. هر سوالی داری بپرس!
       </div>
     </div>
     <div class="message bot">
       <div class="message-actions">
         <button class="copy-btn" title="کپی پیام"><i class="fas fa-copy"></i></button>
       </div>
-      🤖 سلام! من یک دستیار آموزشی هوش مصنوعی هستم.
+      🤖 سلام! من به Cerebras AI متصل هستم و آماده پاسخگویی به سوالات شما.
       <div style="margin-top:.5rem;font-size:.85rem">
-        می‌تونم در مورد این موضوعات کمک کنم:
+        می‌تونم در مورد AI، ML، کاربردها، تاریخچه و... کمک کنم!
         <div style="margin-top:.3rem">
           <span class="chatbot-suggestion" onclick="insertSuggestion('هوش مصنوعی چیست؟')">هوش مصنوعی</span>
           <span class="chatbot-suggestion" onclick="insertSuggestion('یادگیری ماشین چیست؟')">یادگیری ماشین</span>
@@ -290,6 +302,10 @@
     <div class="chatbot-learning-mode">
       <i class="fas fa-book-open"></i>
       <span>حالت آموزشی فعال</span>
+    </div>
+    <div class="connection-status">
+      <span class="status-dot connected" id="statusDot"></span>
+      <span id="connectionStatus">متصل</span>
     </div>
     <div id="questionCounter">❓ ۰ سوال</div>
   </div>
@@ -468,20 +484,10 @@
 </footer>
 
 <script>
-  // پایگاه دانش ساده برای چت بات
-  const knowledgeBase = {
-    'سلام': 'سلام! چطور می‌تونم کمک کنم؟',
-    'هوش مصنوعی چیست؟': 'هوش مصنوعی یعنی ساخت ماشین‌هایی که کارهای انسانی را انجام دهند. مثل فکر کردن، یادگیری و حل مسئله.',
-    'یادگیری ماشین چیست؟': 'یادگیری ماشین زیرمجموعه‌ای از هوش مصنوعی است که به کامپیوترها اجازه می‌دهد از داده‌ها یاد بگیرند.',
-    'شبکه عصبی چیست؟': 'شبکه‌های عصبی الگوریتم‌هایی هستند که از مغز انسان الهام گرفته‌اند و برای تشخیص الگوها استفاده می‌شوند.',
-    'کاربرد هوش مصنوعی': 'AI در پزشکی، خودروهای خودران، شبکه‌های اجتماعی، ترجمه و تشخیص تصویر کاربرد دارد.',
-    'تفاوت ai و ml': 'AI مفهوم کلی هوشمندسازی ماشین‌هاست، ML زیرمجموعه AI است که روی یادگیری از داده تمرکز دارد.',
-    'تاریخچه ai': 'AI در سال ۱۹۵۶ در کنفرانس دارتموث متولد شد. آلن تورینگ و جان مک‌کارتی از پیشگامان آن بودند.',
-    'انواع یادگیری ماشین': '۱- با نظارت ۲- بدون نظارت ۳- تقویتی',
-    'چگونه شروع کنم': 'برای شروع: پایتون یاد بگیرید، ریاضیات پایه را مرور کنید، پروژه‌های ساده انجام دهید.',
-    'پایتون برای ai': 'پایتون زبان اصلی AI است. کتابخانه‌هایی مثل TensorFlow, PyTorch, Scikit-learn بسیار مفید هستند.',
-    'default': 'متأسفانه پاسخ این سوال را نمی‌دانم. می‌توانید سوال خود را به صورت ساده‌تر بیان کنید یا از بخش‌های مختلف سایت استفاده نمایید.'
-  };
+  // تنظیمات Cerebras AI API
+  const API_KEY = 'csk-6e38xjy9xw69v48ekjcx26pep4dy4pkyv66c8d5w3f36pjvf';
+  const API_URL = 'https://api.cerebras.ai/v1/chat/completions';
+  const MODEL = 'llama-3.3-70b';
 
   // المنت‌های چت بات
   const chatbotFloat = document.getElementById('chatbotFloat');
@@ -492,8 +498,11 @@
   const chatbotSend = document.getElementById('chatbotSend');
   const typingIndicator = document.getElementById('typingIndicator');
   const questionCounter = document.getElementById('questionCounter');
+  const statusDot = document.getElementById('statusDot');
+  const connectionStatus = document.getElementById('connectionStatus');
 
   let questionCount = 0;
+  let isConnected = true;
 
   // مدیریت باز و بسته شدن چت بات
   chatbotFloat.addEventListener('click', () => {
@@ -515,37 +524,16 @@
     questionCounter.textContent = `❓ ${questionCount} سوال`;
   }
 
-  // تابع جستجو در پایگاه دانش
-  function findAnswer(question) {
-    const normalizedQuestion = question.toLowerCase().trim();
-    
-    // جستجوی دقیق
-    for (const [key, value] of Object.entries(knowledgeBase)) {
-      if (normalizedQuestion.includes(key.toLowerCase())) {
-        return value;
-      }
+  // تابع به‌روزرسانی وضعیت اتصال
+  function updateConnectionStatus(connected) {
+    isConnected = connected;
+    if (connected) {
+      statusDot.className = 'status-dot connected';
+      connectionStatus.textContent = 'متصل';
+    } else {
+      statusDot.className = 'status-dot';
+      connectionStatus.textContent = 'قطع';
     }
-    
-    // جستجوی جزئی برای کلمات کلیدی
-    const keywords = {
-      'هوش': knowledgeBase['هوش مصنوعی چیست؟'],
-      'یادگیری': knowledgeBase['یادگیری ماشین چیست؟'],
-      'شبکه': knowledgeBase['شبکه عصبی چیست؟'],
-      'کاربرد': knowledgeBase['کاربرد هوش مصنوعی'],
-      'تفاوت': knowledgeBase['تفاوت ai و ml'],
-      'تاریخچه': knowledgeBase['تاریخچه ai'],
-      'انواع': knowledgeBase['انواع یادگیری ماشین'],
-      'شروع': knowledgeBase['چگونه شروع کنم'],
-      'پایتون': knowledgeBase['پایتون برای ai']
-    };
-    
-    for (const [key, value] of Object.entries(keywords)) {
-      if (normalizedQuestion.includes(key)) {
-        return value;
-      }
-    }
-    
-    return knowledgeBase.default;
   }
 
   // تابع افزودن پیام به بدنه چت
@@ -607,8 +595,8 @@
     typingIndicator.classList.remove('active');
   }
 
-  // تابع اصلی ارسال پیام
-  function sendMessage() {
+  // تابع اصلی ارسال پیام به Cerebras AI
+  async function sendMessage() {
     const message = chatbotInput.value.trim();
     if (!message) return;
 
@@ -620,14 +608,73 @@
     questionCount++;
     updateCounter();
 
-    // شبیه‌سازی تاخیر برای طبیعی‌تر شدن
-    setTimeout(() => {
-      const answer = findAnswer(message);
+    try {
+      // استفاده از CORS proxy برای حل مشکل CORS
+      const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+      const response = await fetch(proxyUrl + API_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${API_KEY}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          messages: [
+            {
+              role: "user",
+              content: message
+            }
+          ],
+          max_tokens: 1024,
+          temperature: 0.2,
+          top_p: 1,
+          stream: false
+        })
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('کلید API نامعتبر است');
+        } else if (response.status === 429) {
+          throw new Error('محدودیت درخواست - لطفاً کمی صبر کنید');
+        } else if (response.status >= 500) {
+          throw new Error('مشکل در سرور - لطفاً بعداً تلاش کنید');
+        } else {
+          throw new Error(`خطای HTTP! وضعیت: ${response.status}`);
+        }
+      }
+
+      const data = await response.json();
+      
+      if (data.choices && data.choices[0] && data.choices[0].message) {
+        updateConnectionStatus(true);
+        addMessage(data.choices[0].message.content.replace(/\n/g, '<br>'), false);
+      } else {
+        throw new Error('پاسخی از سرویس دریافت نشد');
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+      updateConnectionStatus(false);
+      
+      let errorMessage = 'خطا در ارتباط با Cerebras AI. ';
+      
+      if (error.message.includes('Failed to fetch')) {
+        errorMessage += 'مشکل شبکه یا CORS. ';
+      } else if (error.message.includes('API')) {
+        errorMessage += error.message;
+      }
+      
+      errorMessage += 'لطفاً بعداً دوباره امتحان کنید.';
+      
+      addMessage(`❌ ${errorMessage}`, false);
+    } finally {
       hideTypingIndicator();
-      addMessage(answer, false);
       chatbotSend.disabled = false;
       chatbotInput.focus();
-    }, 1500);
+    }
   }
 
   // رویدادهای کلیک و کیبورد
@@ -687,6 +734,7 @@
 
   // مقداردهی اولیه
   updateCounter();
+  updateConnectionStatus(true);
 </script>
 </body>
 </html>
