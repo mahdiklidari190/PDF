@@ -1040,52 +1040,81 @@
     </div>
 </header>
 
+<!-- فقط همین بخش را با کد زیر جایگزین کنید -->
 <!-- Video Section -->
 <section id="video-section" class="section">
     <div class="container">
         <h2 class="section-title">🎬 ویدیوی معرفی N8N</h2>
         <div class="video-player">
-            <div class="video-overlay" id="video-overlay">
-                <div class="play-icon-big" onclick="toggleVideo()">
-                    <i class="fas fa-play-circle"></i>
+            <!-- دیو حامل آپارات -->
+            <div id="main-video" style="width:100%;height:100%;">
+                <div id="93661245577">
+                    <script type="text/JavaScript"
+                            src="https://www.aparat.com/embed/ckrx24w?data[rnddiv]=93661245577&data[responsive]=yes"></script>
                 </div>
             </div>
-            <video id="main-video" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_20L0uxV1RqP0smDp9XMY8aE0xxJhSSMobV-bkhdBqk4Ck4WHOgn1TSRa&s=10">
-                <div id="65870250322"><script type="text/JavaScript" src="https://www.aparat.com/embed/ckrx24w?data[rnddiv]=65870250322&data[responsive]=yes"></script></div>
-                مرورگر شما از ویدیو HTML5 پشتیبانی نمی‌کند. لطفاً از مرورگر مدرن استفاده کنید.
-            </video>
+
+            <!-- کنترلرهای سفارشی (در صورت نیاز می‌توانید display:none کنید) -->
             <div class="video-controls">
                 <div class="control-group">
-                    <button class="play-btn" onclick="toggleVideo()">
+                    <button class="play-btn" onclick="toggleAparat()">
                         <i class="fas fa-play" id="play-icon"></i>
                     </button>
                 </div>
-                
+
                 <div class="control-group">
-                    <button class="volume-btn" onclick="toggleMute()">
+                    <button class="volume-btn" onclick="toggleAparatMute()">
                         <i class="fas fa-volume-up" id="volume-icon"></i>
                     </button>
-                    <input type="range" class="volume-slider" value="100" max="100" id="volume-slider" oninput="setVolume(this.value)">
+                    <input type="range" class="volume-slider" value="100" max="100" id="volume-slider" oninput="setAparatVolume(this.value)">
                 </div>
-                
+
                 <input type="range" class="progress-bar" value="0" max="100" id="progress-bar">
                 <span class="time" id="time-display">00:00 / 00:00</span>
-                
+
                 <div class="control-group">
-                    <button class="pip-btn" onclick="togglePip()">
+                    <button class="pip-btn" onclick="toggleAparatPip()">
                         <i class="fas fa-compress"></i>
                     </button>
-                    <button class="fullscreen-btn" onclick="toggleFullscreen()">
+                    <button class="fullscreen-btn" onclick="toggleAparatFullscreen()">
                         <i class="fas fa-expand"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <p style="text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+
+        <p style="text-align:center;margin-top:20px;color:var(--text-secondary);font-size:0.9rem;">
             <i class="fas fa-info-circle"></i> برای مشاهده ویدیوی نسخه نهایی، اینترنت نیاز است
         </p>
     </div>
-</sectio
+</section>
+
+<script>
+/* ---------- API ساده آپارات ---------- */
+const aparatIframe = document.querySelector('#93661245577 iframe');
+
+function aparatPost(msg){
+    if(!aparatIframe) return;
+    aparatIframe.contentWindow.postMessage(msg, 'https://www.aparat.com');
+}
+
+function toggleAparat(){
+    aparatPost({type:'togglePlay'});
+}
+function toggleAparatMute(){
+    aparatPost({type:'toggleMute'});
+}
+function setAparatVolume(v){
+    aparatPost({type:'setVolume', volume: v});
+}
+function toggleAparatPip(){
+    aparatPost({type:'togglePip'});
+}
+function toggleAparatFullscreen(){
+    aparatPost({type:'toggleFullscreen'});
+}
+</script>
+    
 <!-- About N8N -->
 <section id="about" class="section">
     <div class="container">
