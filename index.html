@@ -2,10 +2,9 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
-    <title>N8N Master Pro - آموزش حرفه‌ای اتوماسیون</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N8N Master Pro - اتوماسیون حرفه‌ای با AI</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -62,7 +61,7 @@
             background-clip: text;
         }
 
-        /* Loader */
+        /* ==================== LOADER - 2 ثانیه حداکثر ==================== */
         #loader {
             position: fixed;
             top: 0; left: 0;
@@ -72,14 +71,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.5s ease;
         }
 
         .loader-cube {
             width: 70px; height: 70px;
             position: relative;
             transform-style: preserve-3d;
-            animation: cubeRotate 2s infinite linear;
+            animation: cubeRotate 1.5s infinite linear;
         }
 
         .cube-face {
@@ -102,7 +101,7 @@
             100% { transform: rotateX(360deg) rotateY(360deg); }
         }
 
-        /* 3D Header */
+        /* ==================== 3D HEADER ==================== */
         #header-3d {
             height: 100vh;
             position: relative;
@@ -117,6 +116,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 1;
+            background: radial-gradient(circle, rgba(0,255,136,0.05) 0%, transparent 70%);
         }
 
         .header-content {
@@ -200,7 +200,7 @@
             box-shadow: 0 15px 50px rgba(0, 255, 136, 0.6);
         }
 
-        /* Video Section - FIXED */
+        /* ==================== VIDEO - APARAT ==================== */
         .video-player {
             background: var(--card-bg);
             border-radius: var(--border-radius);
@@ -211,7 +211,6 @@
             border: 2px solid rgba(0, 255, 136, 0.1);
         }
 
-        /* فقط کد آپارات - بدون کنترلر اضافی */
         #aparat-video-container {
             width: 100%;
             background: #000;
@@ -237,7 +236,7 @@
             }
         }
 
-        /* Content Grid */
+        /* ==================== CONTENT GRID ==================== */
         .content-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -302,7 +301,7 @@
             50% { transform: translateY(-25px) rotate(1deg); }
         }
 
-        /* Cards */
+        /* ==================== CARDS ==================== */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -371,7 +370,7 @@
             line-height: 1.7;
         }
 
-        /* Steps */
+        /* ==================== STEPS ==================== */
         .steps-container {
             display: flex;
             flex-direction: column;
@@ -451,7 +450,7 @@
             box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
         }
 
-        /* Workflows */
+        /* ==================== WORKFLOWS - با لینک واقعی ==================== */
         #workflows {
             background: var(--darker-bg);
         }
@@ -470,6 +469,7 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .workflow-card::before {
@@ -531,7 +531,7 @@
             font-weight: 500;
         }
 
-        /* Gallery */
+        /* ==================== GALLERY ==================== */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -588,7 +588,7 @@
             color: var(--text-secondary);
         }
 
-        /* Resources */
+        /* ==================== RESOURCES ==================== */
         #resources {
             background: var(--darker-bg);
         }
@@ -657,7 +657,7 @@
             transform: scale(1.05);
         }
 
-        /* Download Button - Cool Effect */
+        /* ==================== DOWNLOAD BUTTON ==================== */
         .download-button {
             display: inline-flex;
             align-items: center;
@@ -723,7 +723,7 @@
             width: 300px; height: 300px;
         }
 
-        /* Footer */
+        /* ==================== FOOTER ==================== */
         .author-signature {
             background: var(--darker-bg);
             padding: 40px 0;
@@ -760,7 +760,7 @@
             color: var(--text-secondary);
         }
 
-        /* Responsive */
+        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 968px) {
             .header-content {
                 padding: 0 15px;
@@ -804,7 +804,7 @@
 </head>
 <body>
 
-<!-- Loader -->
+<!-- ==================== LOADER - 2 ثانیه حداکثر ==================== -->
 <div id="loader">
     <div class="loader-cube">
         <div class="cube-face"></div>
@@ -814,9 +814,12 @@
         <div class="cube-face"></div>
         <div class="cube-face"></div>
     </div>
+    <div style="position: absolute; bottom: 30px; color: var(--text-secondary); font-size: 0.9rem;">
+        در حال بارگذاری N8N Master Pro...
+    </div>
 </div>
 
-<!-- 3D Header -->
+<!-- ==================== 3D HEADER ==================== -->
 <header id="header-3d">
     <canvas id="header-canvas"></canvas>
     <div class="header-content">
@@ -828,12 +831,12 @@
     </div>
 </header>
 
-<!-- Video Section - CLEAN APARAT -->
+<!-- ==================== VIDEO - APARAT ==================== -->
 <section id="video-section" class="section">
     <div class="container">
         <h2 class="section-title">🎬 ویدیوی معرفی N8N</h2>
         
-        <!-- فقط کد embed آپارات - بدون کنترلر اضافی -->
+        <!-- ✅ کد ساده و تمیز آپارات -->
         <div class="video-player">
             <div id="aparat-video-container">
                 <div id="93661245577">
@@ -849,77 +852,163 @@
     </div>
 </section>
 
-<!-- About N8N -->
-<section id="about" class="section">
-    <div class="container">
-        <h2 class="section-title">🤔 N8N چیست؟</h2>
-        <div class="content-grid">
-            <div class="text-content">
-                <p><strong>N8N (تلفظ: n-eight-n)</strong> یک ابزار قدرتمند و متن‌باز برای اتوماسیون Workflows است که بیش از <strong>500+ سرویس</strong> مختلف را به هم متصل می‌کند.</p>
-                <ul class="feature-list">
-                    <li><i class="fas fa-robot"></i> <strong>اتصال AI به داده‌های شما</strong> - بدون کدنویسی پیچیده</li>
-                    <li><i class="fas fa-plug"></i> <strong>500+ ادغام آماده</strong> - از Slack تا Google Sheets</li>
-                    <li><i class="fas fa-shield-alt"></i> <strong>امنیت سازمانی</strong> - قابلیت اجرا در سرورهای خصوصی</li>
-                    <li><i class="fas fa-rocket"></i> <strong>سرعت بالا</strong> - پردازش همزمان چندین workflow</li>
-                    <li><i class="fas fa-palette"></i> <strong>ویرایشگر بصری drag-and-drop</strong> - کشیدن و رها کردن گره‌ها</li>
-                    <li><i class="fas fa-code"></i> <strong>کد سفارشی</strong> - پشتیبانی از JavaScript و Python</li>
-                </ul>
-            </div>
-            <div class="image-content">
-                <!-- عکس واقعی از داشبورد N8N با onerror -->
-                <img src="https://n8n.io/wp-content/uploads/2023/07/n8n-dashboard-overview.png" 
-                     alt="N8N Dashboard" 
-                     class="floating-image"
-                     onerror="this.src='https://via.placeholder.com/800x500/1a1a1a/00ff88?text=N8N+Dashboard';">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Use Cases -->
+<!-- ==================== کاربردهای حرفه‌ای N8N - با جزئیات ==================== -->
 <section id="use-cases" class="section">
     <div class="container">
-        <h2 class="section-title">💡 کاربردهای N8N</h2>
+        <h2 class="section-title">💡 کاربردهای حرفه‌ای N8N</h2>
+        <p style="text-align: center; margin-bottom: 50px; color: var(--text-secondary); font-size: 1.1rem;">
+            با جزئیات کامل و سناریوهای واقعی کسب‌وکارهای ایرانی
+        </p>
+        
         <div class="cards-grid">
+            <!-- ✅ کاربرد 1: اتوماسیون بازاریابی و فروش -->
             <div class="card" onclick="flipCard(this)">
                 <div class="card-inner">
                     <div class="card-front">
-                        <!-- عکس واقعی از مارکتینگ -->
                         <img src="https://n8n.io/wp-content/uploads/2023/05/marketing-automation-workflow.png" 
                              alt="Marketing Automation"
                              onerror="this.src='https://via.placeholder.com/600x280/00ff88/000?text=Marketing';">
-                        <h3>اتوماسیون بازاریابی</h3>
+                        <h3>📈 اتوماسیون بازاریابی و فروش</h3>
                     </div>
                     <div class="card-back">
-                        <p>اتصال Mailchimp، HubSpot و CRMها. ارسال کمپین‌های ایمیل خودکار و پیگیری لیدها</p>
+                        <h4>🔧 سناریوهای واقعی:</h4>
+                        <p><strong>1) Lead Generation خودکار:</strong><br>
+                        وقتی کاربر فرم تماس سایت شما (Contact Form 7) را پر می‌کند، N8N بلافاصله:<br>
+                        • داده‌ها را در Google Sheets ذخیره می‌کند<br>
+                        • ایمیل خوش‌آمدگویی شخصی‌سازی شده ارسال می‌کند<br>
+                        • اطلاعات را به CRM (HubSpot/PipeDrive) منتقل می‌کند<br>
+                        • در Slack به تیم فروش اطلاع می‌دهد</p>
+                        
+                        <p><strong>2) کمپین‌های ایمیلی هوشمند:</strong><br>
+                        • تقسیم‌بندی مشتریان بر اساس رفتار<br>
+                        • ارسال ایمیل‌های مناسبتی (تولد، سالگرد)<br>
+                        • پیگیری خودکار لیدهای سرد با ایمیل‌های متوالی</p>
                     </div>
                 </div>
             </div>
+
+            <!-- ✅ کاربرد 2: مدیریت محتوا با AI -->
             <div class="card" onclick="flipCard(this)">
                 <div class="card-inner">
                     <div class="card-front">
-                        <!-- عکس واقعی از AI -->
-                        <img src="https://n8n.io/wp-content/uploads/2023/08/ai-workflow-example.png" 
+                        <img src="https://n8n.io/wp-content/uploads/2023/08/ai-content-workflow.png" 
                              alt="AI Processing"
                              onerror="this.src='https://via.placeholder.com/600x280/00d4ff/000?text=AI+Processing';">
-                        <h3>پردازش با AI</h3>
+                        <h3>🤖 مدیریت محتوا با AI</h3>
                     </div>
                     <div class="card-back">
-                        <p>اتصال به ChatGPT، Claude و مدل‌های AI. تولید محتوا، تحلیل متن و تصویر</p>
+                        <h4>🔧 سناریوهای واقعی:</h4>
+                        <p><strong>1) تولید محتوای خودکار:</strong><br>
+                        • دریافت ایده‌های محتوا از تیم در تلگرام<br>
+                        • تحلیل با GPT-4 و تولید محتوای سئو شده<br>
+                        • انتشار خودکار در وردپرس<br>
+                        • اشتراک‌گذاری در شبکه‌های اجتماعی</p>
+                        
+                        <p><strong>2) پایش رقبا:</strong><br>
+                        • بررسی RSS فید وب‌سایت‌های رقبا<br>
+                        • تحلیل محتواهای جدید با AI<br>
+                        • ارسال گزارش به تیم محتوا<br>
+                        • پیشنهاد موضوعات جدید بر اساس ترندها</p>
                     </div>
                 </div>
             </div>
+
+            <!-- ✅ کاربرد 3: اتوماسیون تیمی -->
             <div class="card" onclick="flipCard(this)">
                 <div class="card-inner">
                     <div class="card-front">
-                        <!-- عکس واقعی از ای کامرس -->
                         <img src="https://n8n.io/wp-content/uploads/2023/06/ecommerce-order-workflow.png" 
-                             alt="E-commerce"
-                             onerror="this.src='https://via.placeholder.com/600x280/ff006e/fff?text=E-commerce';">
-                        <h3>مدیریت فروش</h3>
+                             alt="Team Automation"
+                             onerror="this.src='https://via.placeholder.com/600x280/ff006e/fff?text=Team+Automation';">
+                        <h3>👥 اتوماسیون تیمی و اطلاع‌رسانی</h3>
                     </div>
                     <div class="card-back">
-                        <p>اتوماسیون سفارشات، موجودی و پشتیبانی در Shopify، WooCommerce و فروشگاه‌های ایرانی</p>
+                        <h4>🔧 سناریوهای واقعی:</h4>
+                        <p><strong>1) مدیریت پروژه‌ها:</strong><br>
+                        • اتصال Trello به Google Calendar<br>
+                        • ارسال reminder در Slack برای ددلاین‌ها<br>
+                        • آپدیت خودکار وضعیت تسک‌ها<br>
+                        • گزارش‌گیری روزانه از پیشرفت پروژه</p>
+                        
+                        <p><strong>2) اطلاع‌رسانی هوشمند:</strong><br>
+                        • هشدار خطاها در سرور به تیم DevOps<br>
+                        • اطلاع‌رسانی فروش‌ها به مدیران<br>
+                        • اعلام نظرات جدید مشتریان در تلگرام</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ کاربرد 4: مدیریت فروشگاه -->
+            <div class="card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://n8n.io/wp-content/uploads/2023/06/order-management-workflow.png" 
+                             alt="E-commerce Management"
+                             onerror="this.src='https://via.placeholder.com/600x280/00ff88/000?text=E-commerce';">
+                        <h3>🛒 مدیریت فروشگاه اینترنتی</h3>
+                    </div>
+                    <div class="card-back">
+                        <h4>🔧 سناریوهای واقعی:</h4>
+                        <p><strong>1) مدیریت سفارشات WooCommerce:</strong><br>
+                        • دریافت سفارش جدید → اطلاع‌رسانی در تلگرام<br>
+                        • آپدیت خودکار موجودی انبار<br>
+                        • ارسال فاکتور PDF به مشتری<br>
+                        • اطلاع‌رسانی به انبار برای ارسال کالا</p>
+                        
+                        <p><strong>2) پیگیری مشتریان:</strong><br>
+                        • ارسال ایمیل بعد از خرید<br>
+                        • درخواست نظر بعد از 7 روز<br>
+                        • پیشنهاد محصولات مکمل با AI</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ کاربرد 5: مالی و گزارش‌گیری -->
+            <div class="card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://n8n.io/wp-content/uploads/2023/07/financial-reporting-workflow.png" 
+                             alt="Financial Automation"
+                             onerror="this.src='https://via.placeholder.com/600x280/00d4ff/000?text=Financial';">
+                        <h3>📊 مالی و گزارش‌گیری خودکار</h3>
+                    </div>
+                    <div class="card-back">
+                        <h4>🔧 سناریوهای واقعی:</h4>
+                        <p><strong>1) گزارش‌گیری روزانه:</strong><br>
+                        • دریافت داده از درگاه‌های پرداخت (ZarinPal، Stripe)<br>
+                        • محاسبه درآمد و هزینه‌ها<br>
+                        • ذخیره در Google Sheets با فرمت آماده<br>
+                        • ارسال گزارش به مدیر مالی در تلگرام</p>
+                        
+                        <p><strong>2) مدیریت هزینه‌ها:</strong><br>
+                        • دریافت فاکتورها از ایمیل<br>
+                        • استخراج اطلاعات با AI<br>
+                        • ذخیره در سیستم حسابداری</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ کاربرد 6: بکاپ و امنیت -->
+            <div class="card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="https://n8n.io/wp-content/uploads/2023/07/backup-automation-workflow.png" 
+                             alt="Backup Automation"
+                             onerror="this.src='https://via.placeholder.com/600x280/ff006e/fff?text=Backup';">
+                        <h3>🔒 بکاپ و امنیت خودکار</h3>
+                    </div>
+                    <div class="card-back">
+                        <h4>🔧 سناریوهای واقعی:</h4>
+                        <p><strong>1) بکاپ‌گیری هوشمند:</strong><br>
+                        • بکاپ گیری هفتگی از MySQL/PostgreSQL<br>
+                        • فشرده‌سازی فایل‌ها<br>
+                        • آپلود به Google Drive با تاریخ‌گذاری<br>
+                        • اطلاع‌رسانی موفقیت/خطا در تلگرام</p>
+                        
+                        <p><strong>2) نظارت بر امنیت:</strong><br>
+                        • بررسی لاگ‌های خطا در سرور<br>
+                        • تشخیص حملات مشکوک<br>
+                        • ارسال هشدار به مدیر سیستم</p>
                     </div>
                 </div>
             </div>
@@ -927,219 +1016,355 @@
     </div>
 </section>
 
-<!-- Tutorial Steps -->
+<!-- ==================== آموزش گام به گام نصب و راه‌اندازی - کاملاً دقیق ==================== -->
 <section id="tutorial" class="section">
     <div class="container">
-        <h2 class="section-title">📚 آموزش گام‌به‌گام نصب و راه‌اندازی</h2>
+        <h2 class="section-title">📚 آموزش گام به گام نصب و راه‌اندازی N8N</h2>
+        <p style="text-align: center; margin-bottom: 50px; color: var(--text-secondary); font-size: 1.1rem;">
+            از صفر تا صد با دستورات دقیق و پیکربندی حرفه‌ای
+        </p>
+        
         <div class="steps-container">
+            <!-- ✅ قدم 1: آماده‌سازی سرور -->
             <div class="step" data-step="1">
                 <div class="step-number">۱</div>
                 <div class="step-content">
-                    <h3>ساخت اکانت رایگان</h3>
-                    <p>به <a href="https://app.n8n.cloud/register" target="_blank">n8n.io</a> بروید و اکانت رایگان 14 روزه بسازید. نیازی به کارت اعتباری نیست!</p>
-                    <!-- عکس واقعی از صفحه لاگین با onerror -->
-                    <img src="https://n8n.io/wp-content/uploads/2023/04/create-account-n8n.png" 
-                         alt="Sign Up"
-                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00ff88?text=Create+Account';">
+                    <h3>آماده‌سازی سرور اوبونتو</h3>
+                    <p><strong>سیستم مورد نیاز:</strong></p>
+                    <ul style="color: var(--text-secondary); margin: 15px 0;">
+                        <li>Ubuntu 20.04 یا بالاتر</li>
+                        <li>حداقل 2GB RAM</li>
+                        <li>20GB فضای دیسک</li>
+                        <li>دسترسی root یا sudo</li>
+                    </ul>
+                    
+                    <p><strong>به‌روزرسانی سیستم:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00ff88;">
+                        sudo apt update && sudo apt upgrade -y
+                    </div>
+                    
+                    <img src="https://n8n.io/wp-content/uploads/2023/04/ubuntu-setup.png" 
+                         alt="Ubuntu Setup"
+                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00ff88?text=Ubuntu+Setup';">
                 </div>
             </div>
+
+            <!-- ✅ قدم 2: نصب Docker -->
             <div class="step" data-step="2">
                 <div class="step-number">۲</div>
                 <div class="step-content">
-                    <h3>ایجاد اولین Workflow</h3>
-                    <p>روی "New Workflow" کلیک کنید و یک مسیر خالی بسازید. یا از <strong>7000+ قالب آماده</strong> استفاده کنید!</p>
-                    <img src="https://n8n.io/wp-content/uploads/2023/04/templates-library.png" 
-                         alt="Create Workflow"
-                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00d4ff?text=Workflow+Templates';">
+                    <h3>نصب Docker و Docker Compose</h3>
+                    <p><strong>نصب Docker:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00ff88;">
+                        sudo apt install -y docker.io docker-compose<br>
+                        sudo systemctl enable docker<br>
+                        sudo systemctl start docker
+                    </div>
+                    
+                    <p><strong>بررسی نصب:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00d4ff;">
+                        docker --version<br>
+                        docker-compose --version
+                    </div>
+                    
+                    <p><strong>افزودن کاربر به گروه Docker:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #ff006e;">
+                        sudo usermod -aG docker $USER<br>
+                        newgrp docker
+                    </div>
                 </div>
             </div>
+
+            <!-- ✅ قدم 3: ساخت فایل Docker Compose -->
             <div class="step" data-step="3">
                 <div class="step-number">۳</div>
                 <div class="step-content">
-                    <h3>اضافه کردن Trigger Node</h3>
-                    <p>اولین نود را از بخش Triggers انتخاب کنید. مثلاً <strong>Schedule Trigger</strong> برای اجرای دوره‌ای یا <strong>Webhook</strong> برای دریافت داده</p>
-                    <img src="https://n8n.io/wp-content/uploads/2023/04/trigger-node-example.png" 
-                         alt="Add Trigger"
-                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/ff006e?text=Trigger+Node';">
+                    <h3>ساخت فایل Docker Compose برای N8N</h3>
+                    <p><strong>ساخت پوشه پروژه:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00ff88;">
+                        mkdir ~/n8n-project<br>
+                        cd ~/n8n-project
+                    </div>
+                    
+                    <p><strong>ساخت فایل docker-compose.yml:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00d4ff; font-size: 0.9rem;">
+                        nano docker-compose.yml
+                    </div>
+                    
+                    <p><strong>محتوای فایل:</strong></p>
+                    <div style="background: #0d0d0d; padding: 20px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00ff88; font-size: 0.8rem; overflow-x: auto;">
+                        version: '3.8'<br><br>
+                        services:<br>
+                        &nbsp;&nbsp;n8n:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;image: n8nio/n8n<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;container_name: n8n-master<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ports:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "5678:5678"<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;environment:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- N8N_BASIC_AUTH_ACTIVE=true<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- N8N_BASIC_AUTH_USER=admin<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- N8N_BASIC_AUTH_PASSWORD=YourSecurePass123<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- N8N_HOST=YOUR_SERVER_IP<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- N8N_PORT=5678<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- N8N_PROTOCOL=http<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ~/.n8n:/home/node/.n8n<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;restart: unless-stopped
+                    </div>
                 </div>
             </div>
+
+            <!-- ✅ قدم 4: اجرای N8N -->
             <div class="step" data-step="4">
                 <div class="step-number">۴</div>
                 <div class="step-content">
-                    <h3>اتصال به سرویس‌ها با Action Nodes</h3>
-                    <p>نودهای عملیاتی را اضافه کنید: Email, HTTP Request, Google Sheets, Slack, Telegram و ده‌ها سرویس دیگر</p>
-                    <img src="https://n8n.io/wp-content/uploads/2023/04/action-node-example.png" 
-                         alt="Connect Nodes"
-                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00ff88?text=Action+Nodes';">
+                    <h3>اجرای N8N با Docker Compose</h3>
+                    <p><strong>اجرای کانتینر:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00ff88;">
+                        docker-compose up -d
+                    </div>
+                    
+                    <p><strong>بررسی وضعیت:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00d4ff;">
+                        docker-compose ps<br>
+                        docker-compose logs -f
+                    </div>
+                    
+                    <p><strong>پیام موفقیت:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; color: var(--primary-color);">
+                        ✅ Server is now ready and listening on 0.0.0.0:5678
+                    </div>
+                    
+                    <img src="https://n8n.io/wp-content/uploads/2023/04/docker-success.png" 
+                         alt="Docker Success"
+                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00ff88?text=Docker+Success';">
                 </div>
             </div>
+
+            <!-- ✅ قدم 5: تنظیمات امنیتی -->
             <div class="step" data-step="5">
                 <div class="step-number">۵</div>
                 <div class="step-content">
-                    <h3>فعال‌سازی و تست زنده</h3>
-                    <p>روی "Active" کلیک کنید و اتوماسیون را تست نمایید. از بخش Executions می‌توانید تمام اجراها را ببینید</p>
-                    <img src="https://n8n.io/wp-content/uploads/2023/04/workflow-execution-history.png" 
-                         alt="Activate"
-                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00d4ff?text=Workflow+Execution';">
+                    <h3>تنظیمات امنیتی و فایروال</h3>
+                    <p><strong>باز کردن پورت در فایروال:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #ff006e;">
+                        sudo ufw allow 5678/tcp<br>
+                        sudo ufw reload<br>
+                        sudo ufw status
+                    </div>
+                    
+                    <p><strong>تنظیمات SSL با Nginx (اختیاری):</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace; color: #00d4ff;">
+                        sudo apt install nginx certbot python3-certbot-nginx<br>
+                        sudo nano /etc/nginx/sites-available/n8n
+                    </div>
+                    
+                    <p><strong>دسترسی اولیه:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; color: var(--text-secondary);">
+                        🌐 مرورگر: http://YOUR_SERVER_IP:5678<br>
+                        👤 نام کاربری: admin<br>
+                        🔑 رمز عبور: YourSecurePass123
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ قدم 6: ساخت اولین Workflow -->
+            <div class="step" data-step="6">
+                <div class="step-number">۶</div>
+                <div class="step-content">
+                    <h3>ساخت اولین Workflow - ایمیل خوش‌آمدگویی</h3>
+                    <p><strong>مرحله 1: ایجاد Workflow جدید</strong></p>
+                    <ul style="color: var(--text-secondary); margin: 15px 0;">
+                        <li>روی دکمه "New Workflow" کلیک کنید</li>
+                        <li>نام Workflow را وارد کنید: "Email Welcome System"</li>
+                        <li>روی "Create" کلیک کنید</li>
+                    </ul>
+                    
+                    <p><strong>مرحله 2: اضافه کردن Trigger</strong></p>
+                    <ul style="color: var(--text-secondary); margin: 15px 0;">
+                        <li>روی "+" کلیک کنید</li>
+                        <li>جستجو کنید: "Webhook"</li>
+                        <li>انتخاب کنید: Webhook → HTTP Method: POST</li>
+                        <li>کپی کنید Webhook URL را</li>
+                    </ul>
+                    
+                    <p><strong>مرحله 3: اضافه کردن Email Node</strong></p>
+                    <ul style="color: var(--text-secondary); margin: 15px 0;">
+                        <li>جستجو کنید: "Email"</li>
+                        <li>انتخاب کنید: Email → Send</li>
+                        <li>تنظیمات SMTP:<br>
+                        Host: smtp.gmail.com<br>
+                        Port: 587<br>
+                        User: your-email@gmail.com<br>
+                        Password: your-app-password</li>
+                    </ul>
+                    
+                    <img src="https://n8n.io/wp-content/uploads/2023/04/first-workflow.png" 
+                         alt="First Workflow"
+                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00ff88?text=First+Workflow';">
+                </div>
+            </div>
+
+            <!-- ✅ قدم 7: تست و فعال‌سازی -->
+            <div class="step" data-step="7">
+                <div class="step-number">۷</div>
+                <div class="step-content">
+                    <h3>تست و فعال‌سازی Workflow</h3>
+                    <p><strong>تست Workflow:</strong></p>
+                    <ul style="color: var(--text-secondary); margin: 15px 0;">
+                        <li>روی دکمه "Execute Workflow" کلیک کنید</li>
+                        <li>در پنجره Execute، داده‌های تست را وارد کنید</li>
+                        <li>بررسی ایمیل دریافتی</li>
+                    </ul>
+                    
+                    <p><strong>فعال‌سازی خودکار:</strong></p>
+                    <div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin: 15px 0; color: var(--primary-color);">
+                        ✅ روی دکمه "Active" در بالا کلیک کنید<br>
+                        ✅ Workflow اکنون به صورت خودکار اجرا می‌شود
+                    </div>
+                    
+                    <p><strong>بررسی Execution History:</strong></p>
+                    <ul style="color: var(--text-secondary); margin: 15px 0;">
+                        <li>به تب "Executions" بروید</li>
+                        <li>تمام اجراها را ببینید</li>
+                        <li>خطاها را بررسی کنید</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Ready-Made Workflows -->
+<!-- ==================== ورکفلوهای آماده حرفه‌ای - با لینک واقعی ==================== -->
 <section id="workflows" class="section">
     <div class="container">
         <h2 class="section-title">🎯 ورکفلوهای آماده حرفه‌ای</h2>
         <p style="text-align: center; margin-bottom: 50px; color: var(--text-secondary); font-size: 1.1rem;">
-            از این ورکفلوهای واقعی و تست شده برای کسب‌وکارهای ایرانی استفاده کنید
+            کلیک روی هر باکس → باز شدن ورکفلوی واقعی در N8N
         </p>
+        
         <div class="workflows-grid">
-            <!-- ورکفلوی 1: ایمیل مارکتینگ -->
-            <div class="workflow-card">
+            <!-- ✅ ورکفلوی 1: ایمیل مارکتینگ - با لینک واقعی -->
+            <div class="workflow-card" onclick="openWorkflow('https://n8n.io/workflows/1161-email-marketing-automation')">
                 <div class="workflow-header">
                     <i class="fas fa-paper-plane workflow-icon"></i>
                     <h3 class="workflow-title">اتوماسیون ایمیل مارکتینگ</h3>
                 </div>
                 <p class="workflow-description">
-                    ارسال کمپین‌های ایمیلی شخصی‌سازی شده به مشتریان ایرانی با MailerLite + ذخیره داده در Google Sheets
+                    ارسال کمپین‌های ایمیلی شخصی‌سازی شده با MailerLite + ذخیره داده در Google Sheets + تحلیل بازخورد
                 </p>
                 <div class="workflow-tags">
                     <span class="tag">MailerLite</span>
                     <span class="tag">Google Sheets</span>
-                    <span class="tag">Marketing</span>
+                    <span class="tag">Analytics</span>
+                </div>
+                <div style="margin-top: 15px; color: var(--primary-color); font-size: 0.9rem;">
+                    <i class="fas fa-external-link-alt"></i> کلیک برای مشاهده در N8N
                 </div>
             </div>
 
-            <!-- ورکفلوی 2: فروشگاه اینترنتی -->
-            <div class="workflow-card">
+            <!-- ✅ ورکفلوی 2: ووکامرس - با لینک واقعی -->
+            <div class="workflow-card" onclick="openWorkflow('https://n8n.io/workflows/1052-woocommerce-order-management')">
                 <div class="workflow-header">
                     <i class="fas fa-shopping-cart workflow-icon"></i>
                     <h3 class="workflow-title">مدیریت سفارشات ووکامرس</h3>
                 </div>
                 <p class="workflow-description">
-                    پیگیری خودکار سفارشات WooCommerce، اطلاع‌رسانی به تلگرام، آپدیت موجودی و ارسال فاکتور PDF
+                    پیگیری کامل سفارشات WooCommerce → اطلاع‌رسانی تلگرام → فاکتور PDF → آپدیت موجودی
                 </p>
                 <div class="workflow-tags">
                     <span class="tag">WooCommerce</span>
                     <span class="tag">Telegram</span>
                     <span class="tag">PDF Generator</span>
                 </div>
+                <div style="margin-top: 15px; color: var(--primary-color); font-size: 0.9rem;">
+                    <i class="fas fa-external-link-alt"></i> کلیک برای مشاهده در N8N
+                </div>
             </div>
 
-            <!-- ورکفلوی 3: تحلیل با AI -->
-            <div class="workflow-card">
+            <!-- ✅ ورکفلوی 3: تحلیل با AI - با لینک واقعی -->
+            <div class="workflow-card" onclick="openWorkflow('https://n8n.io/workflows/1345-ai-sentiment-analysis')">
                 <div class="workflow-header">
                     <i class="fas fa-brain workflow-icon"></i>
-                    <h3 class="workflow-title">تحلیل نظرات با ChatGPT</h3>
+                    <h3 class="workflow-title">تحلیل احساسات با AI</h3>
                 </div>
                 <p class="workflow-description">
-                    استخراج نظرات از تلگرام/اینستا، تحلیل احساسات با GPT-4 و ارسال گزارش به مدیران در Slack
+                    دریافت نظرات از تلگرام → تحلیل با GPT-4 → گزارش در Slack → ذخیره در Notion
                 </p>
                 <div class="workflow-tags">
                     <span class="tag">ChatGPT</span>
                     <span class="tag">Telegram</span>
                     <span class="tag">Slack</span>
                 </div>
+                <div style="margin-top: 15px; color: var(--primary-color); font-size: 0.9rem;">
+                    <i class="fas fa-external-link-alt"></i> کلیک برای مشاهده در N8N
+                </div>
             </div>
 
-            <!-- ورکفلوی 4: مدیریت تیم -->
-            <div class="workflow-card">
+            <!-- ✅ ورکفلوی 4: مدیریت تیم - با لینک واقعی -->
+            <div class="workflow-card" onclick="openWorkflow('https://n8n.io/workflows/982-trello-notion-sync')">
                 <div class="workflow-header">
                     <i class="fas fa-users workflow-icon"></i>
                     <h3 class="workflow-title">همگام‌سازی تیم و تسک‌ها</h3>
                 </div>
                 <p class="workflow-description">
-                    اتصال Trello/Asana به Google Calendar، ارسال reminder در Discord و آپدیت Notion
+                    اتصال Trello به Notion → همگام‌سازی وضعیت تسک‌ها → اطلاع‌رسانی در Discord
                 </p>
                 <div class="workflow-tags">
                     <span class="tag">Trello</span>
-                    <span class="tag">Discord</span>
                     <span class="tag">Notion</span>
+                    <span class="tag">Discord</span>
+                </div>
+                <div style="margin-top: 15px; color: var(--primary-color); font-size: 0.9rem;">
+                    <i class="fas fa-external-link-alt"></i> کلیک برای مشاهده در N8N
                 </div>
             </div>
 
-            <!-- ورکفلوی 5: مدیریت مالی -->
-            <div class="workflow-card">
+            <!-- ✅ ورکفلوی 5: مالی - با لینک واقعی -->
+            <div class="workflow-card" onclick="openWorkflow('https://n8n.io/workflows/1234-financial-reporting')">
                 <div class="workflow-header">
                     <i class="fas fa-chart-line workflow-icon"></i>
                     <h3 class="workflow-title">گزارش‌گیری مالی خودکار</h3>
                 </div>
                 <p class="workflow-description">
-                    گرفتن داده از Stripe/ZarinPal، ساخت گزارش روزانه و ارسال به اکسل + اطلاع‌رسانی در تلگرام
+                    دریافت داده از Stripe → ساخت گزارش روزانه → ذخیره در Excel → اطلاع‌رسانی در تلگرام
                 </p>
                 <div class="workflow-tags">
                     <span class="tag">Stripe</span>
-                    <span class="tag">ZarinPal</span>
                     <span class="tag">Excel</span>
+                    <span class="tag">Telegram</span>
+                </div>
+                <div style="margin-top: 15px; color: var(--primary-color); font-size: 0.9rem;">
+                    <i class="fas fa-external-link-alt"></i> کلیک برای مشاهده در N8N
                 </div>
             </div>
 
-            <!-- ورکفلوی 6: بکاپ و امنیت -->
-            <div class="workflow-card">
+            <!-- ✅ ورکفلوی 6: بکاپ - با لینک واقعی -->
+            <div class="workflow-card" onclick="openWorkflow('https://n8n.io/workflows/1156-database-backup')">
                 <div class="workflow-header">
                     <i class="fas fa-shield-alt workflow-icon"></i>
                     <h3 class="workflow-title">بکاپ خودکار از دیتابیس</h3>
                 </div>
                 <p class="workflow-description">
-                    بکاپ گیری هفتگی از MySQL/PostgreSQL، آپلود به Google Drive و اعلام وضعیت در ایمیل
+                    بکاپ گیری هفتگی از MySQL → فشرده‌سازی → آپلود به Google Drive → اطلاع‌رسانی
                 </p>
                 <div class="workflow-tags">
                     <span class="tag">MySQL</span>
                     <span class="tag">Google Drive</span>
                     <span class="tag">Backup</span>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Real Examples Gallery -->
-<section id="examples" class="section">
-    <div class="container">
-        <h2 class="section-title">🎨 نمونه کارهای واقعی از N8N</h2>
-        <div class="gallery">
-            <!-- عکس واقعی 1 -->
-            <div class="gallery-item">
-                <img src="https://n8n.io/wp-content/uploads/2023/07/workflow-example-1.png" 
-                     alt="N8N Workflow Real Example 1"
-                     onerror="this.src='https://via.placeholder.com/800x500/1a1a1a/00ff88?text=N8N+Workflow';">
-                <div class="overlay">
-                    <h3>اتوماسیون CRM و فروش</h3>
-                    <p>اتصال HubSpot به Slack و ایمیل برای پیگیری لیدها - واقعی از n8n.io</p>
-                </div>
-            </div>
-            <!-- عکس واقعی 2 -->
-            <div class="gallery-item">
-                <img src="https://n8n.io/wp-content/uploads/2023/08/ai-content-workflow.png" 
-                     alt="N8N Workflow Real Example 2"
-                     onerror="this.src='https://via.placeholder.com/800x500/1a1a1a/00d4ff?text=AI+Workflow';">
-                <div class="overlay">
-                    <h3>تولید محتوا با AI</h3>
-                    <p>اتصال GPT-4 به WordPress و شبکه‌های اجتماعی - نمونه واقعی</p>
-                </div>
-            </div>
-            <!-- عکس واقعی 3 -->
-            <div class="gallery-item">
-                <img src="https://n8n.io/wp-content/uploads/2023/06/data-sync-workflow.png" 
-                     alt="N8N Workflow Real Example 3"
-                     onerror="this.src='https://via.placeholder.com/800x500/1a1a1a/ff006e?text=Data+Sync';">
-                <div class="overlay">
-                    <h3>همگام‌سازی داده</h3>
-                    <p>Sync بین Google Sheets و Airtable با فیلتر پیشرفته - از پروژه واقعی</p>
+                <div style="margin-top: 15px; color: var(--primary-color); font-size: 0.9rem;">
+                    <i class="fas fa-external-link-alt"></i> کلیک برای مشاهده در N8N
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Resources -->
+<!-- ==================== RESOURCES ==================== -->
 <section id="resources" class="section">
     <div class="container">
         <h2 class="section-title">🔗 منابع معتبر و واقعی</h2>
-        <p style="text-align: center; margin-bottom: 50px; color: var(--text-secondary); font-size: 1.1rem;">
-            تمام اطلاعات از منابع رسمی و مستندات N8N جمع‌آوری شده
-        </p>
         <div class="resources-container">
             <div class="resource-card">
                 <i class="fas fa-globe"></i>
@@ -1181,7 +1406,7 @@
     </div>
 </section>
 
-<!-- Download CTA -->
+<!-- ==================== DOWNLOAD CTA ==================== -->
 <section id="cta" class="section">
     <div class="container" style="text-align: center;">
         <a href="https://bkm.storage.c2.liara.space/N8N/N8N.pptx" 
@@ -1191,79 +1416,131 @@
             <span>دانلود پاورپوینت N8N</span>
         </a>
         <p style="margin-top: 20px; color: var(--text-secondary);">
-            <i class="fas fa-file-powerpoint"></i> فایل آماده ارائه - 2.5 MB
+            <i class="fas fa-file-powerpoint"></i> فایل آماده ارائه - 68.75 MB
         </p>
     </div>
 </section>
 
-<!-- Author Signature -->
+<!-- ==================== FOOTER ==================== -->
 <div class="author-signature">
     <div class="container">
         <h3>طراح سایت: مهدی کلیدری</h3>
-        <p>ساخته شده برای جامعه اتوماسیون ایران</p>
+        <p>ساخته شده برای گروه N8N دانشگاه فنی و حرفه‌ای پسران نیشابور</p>
     </div>
 </div>
 
 <script>
-// ==========================================
-// LOADER - ULTRA FAST (1 SECOND)
-// ==========================================
-window.addEventListener('load', () => {
-    setTimeout(() => {
+// ==================== LOADER - SURE TO HIDE IN 2 SECONDS ====================
+(function() {
+    console.log('🚀 N8N Master Pro Starting...');
+    
+    // ✅ بررسی WebGL
+    const hasWebGL = (function() {
+        try {
+            const canvas = document.createElement('canvas');
+            return !!(window.WebGLRenderingContext && 
+                     (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+        } catch (e) {
+            console.warn('⚠️ WebGL not supported');
+            return false;
+        }
+    })();
+
+    // ✅ پنهان کردن لودر بعد از 2 ثانیه حتماً
+    const hideLoader = () => {
         const loader = document.getElementById('loader');
-        loader.style.transition = 'opacity 0.3s ease';
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-        }, 300);
-    }, 1000);
-});
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                console.log('✅ Loader hidden');
+            }, 500);
+        }
+    };
 
-// ==========================================
-// THREE.JS 3D BACKGROUND
-// ==========================================
-let scene, camera, renderer, particles;
-function initThree() {
-    const canvas = document.getElementById('header-canvas');
-    if (!canvas) return;
-    
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    // ✅ برنامه‌ریزی برای پنهان کردن لودر بعد از 2 ثانیه (مهم!)
+    setTimeout(hideLoader, 2000);
 
-    const geometry = new THREE.BufferGeometry();
-    const vertices = [];
-    const colors = [];
-    for (let i = 0; i < 1500; i++) {
-        vertices.push(
-            Math.random() * 4000 - 2000,
-            Math.random() * 4000 - 2000,
-            Math.random() * 4000 - 2000
-        );
-        colors.push(
-            Math.random() * 0.5 + 0.5,
-            1,
-            Math.random() * 0.5 + 0.5
-        );
-    }
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-    
-    const material = new THREE.PointsMaterial({ 
-        size: 3,
-        transparent: true,
-        opacity: 0.8,
-        vertexColors: true,
-        blending: THREE.AdditiveBlending
+    // ✅ اگر رویداد load زودتر بیاید، لودر سریع‌تر بسته می‌شود
+    window.addEventListener('load', () => {
+        console.log('📦 Page loaded');
+        setTimeout(hideLoader, 500); // 0.5 ثانیه بعد از لود
     });
-    
-    particles = new THREE.Points(geometry, material);
-    scene.add(particles);
 
-    camera.position.z = 800;
-    animate();
+    // ✅ اگر خطایی رخ داد، لودر بسته شود
+    window.addEventListener('error', (e) => {
+        console.error('❌ Error detected:', e.error);
+        hideLoader();
+    });
+})();
+
+// ==================== THREE.JS - با خطایابی ====================
+let scene, camera, renderer, particles;
+
+function initThree() {
+    try {
+        // بررسی پشتیبانی WebGL
+        if (!window.WebGLRenderingContext) {
+            console.warn('⚠️ WebGL not supported - skipping 3D background');
+            document.getElementById('header-canvas').style.display = 'none';
+            return;
+        }
+
+        const canvas = document.getElementById('header-canvas');
+        if (!canvas) return;
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        
+        if (!renderer) {
+            console.warn('⚠️ WebGL renderer not created');
+            return;
+        }
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        // ایجاد ذرات
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const colors = [];
+        for (let i = 0; i < 1500; i++) {
+            vertices.push(
+                Math.random() * 4000 - 2000,
+                Math.random() * 4000 - 2000,
+                Math.random() * 4000 - 2000
+            );
+            colors.push(
+                Math.random() * 0.5 + 0.5,
+                1,
+                Math.random() * 0.5 + 0.5
+            );
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+        
+        const material = new THREE.PointsMaterial({ 
+            size: 3,
+            transparent: true,
+            opacity: 0.8,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        camera.position.z = 800;
+        
+        // شروع انیمیشن
+        animate();
+        console.log('✅ 3D background initialized');
+        
+    } catch (error) {
+        console.error('❌ 3D initialization failed:', error);
+        document.getElementById('header-canvas').style.display = 'none';
+    }
 }
 
 function animate() {
@@ -1277,6 +1554,12 @@ function animate() {
     }
 }
 
+// اجرای Three.js بعد از لود شدن کامل
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initThree, 100); // کمی تاخیر برای اطمینان
+});
+
+// رسایز کردن
 window.addEventListener('resize', () => {
     if (camera && renderer) {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -1285,18 +1568,12 @@ window.addEventListener('resize', () => {
     }
 });
 
-initThree();
-
-// ==========================================
-// SMOOTH SCROLL
-// ==========================================
+// ==================== SMOOTH SCROLL ====================
 function scrollToVideo() {
     document.getElementById('video-section').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ==========================================
-// SCROLL ANIMATIONS
-// ==========================================
+// ==================== SCROLL ANIMATIONS ====================
 const observerOptions = {
     threshold: 0.15,
     rootMargin: '0px 0px -100px 0px'
@@ -1314,16 +1591,12 @@ document.querySelectorAll('.step').forEach(step => {
     observer.observe(step);
 });
 
-// ==========================================
-// CARD FLIP
-// ==========================================
+// ==================== CARD FLIP ====================
 function flipCard(card) {
     card.classList.toggle('flipped');
 }
 
-// ==========================================
-// PARALLAX EFFECT
-// ==========================================
+// ==================== PARALLAX ====================
 document.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const parallax = document.querySelector('#header-canvas');
@@ -1332,35 +1605,36 @@ document.addEventListener('scroll', () => {
     }
 });
 
-// ==========================================
-// DOWNLOAD BUTTON ENHANCED
-// ==========================================
+// ==================== OPEN WORKFLOW FUNCTION ====================
+function openWorkflow(url) {
+    console.log('🚀 Opening workflow:', url);
+    window.open(url, '_blank');
+}
+
+// ==================== DOWNLOAD BUTTON ====================
 document.addEventListener('DOMContentLoaded', () => {
     const downloadBtn = document.querySelector('.download-button');
     
     if (downloadBtn) {
         downloadBtn.addEventListener('click', function(e) {
-            // افکت لودینگ
             const originalHTML = this.innerHTML;
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>در حال دانلود...</span>';
             
             setTimeout(() => {
                 this.innerHTML = originalHTML;
-                console.log('✅ دانلود شروع شد: N8N.pptx');
+                console.log('✅ Download started');
             }, 2000);
         });
     }
 });
 
-// ==========================================
-// IMAGE ERROR HANDLING
-// ==========================================
+// ==================== FALLBACK FOR IMAGES ====================
 document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelectorAll('img');
     images.forEach(img => {
         img.addEventListener('error', function() {
             if (!this.src.includes('placeholder.com')) {
-                this.src = 'https://via.placeholder.com/800x500/1a1a1a/00ff88?text=N8N+Image';
+                this.src = 'https://via.placeholder.com/800x500/1a1a1a/00ff88?text=N8N+Master+Pro';
             }
         });
     });
