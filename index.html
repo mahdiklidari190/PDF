@@ -4,27 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
     <title>N8N Master Pro - آموزش حرفه‌ای اتوماسیون</title>
-    <meta name="description" content="آموزش کامل N8N با افکت‌های 3D، ویدیوهای حرفه‌ای و ورکفلوهای آماده - طراحی شده توسط مهدی کلیدری">
     
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     
     <style>
-        /* ==========================================
-           RESET & BASE STYLES - 2025 MODERN
-           ========================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
             --primary-color: #00ff88;
             --secondary-color: #00d4ff;
@@ -38,23 +26,18 @@
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-            scroll-padding-top: 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Vazirmatn', sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 20%);
         }
 
         .container {
@@ -77,12 +60,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.2;
         }
 
-        /* ==========================================
-           LOADER - ULTRA FAST (1 SECOND)
-           ========================================== */
+        /* Loader */
         #loader {
             position: fixed;
             top: 0; left: 0;
@@ -122,9 +102,7 @@
             100% { transform: rotateX(360deg) rotateY(360deg); }
         }
 
-        /* ==========================================
-           3D HEADER WITH PARTICLES
-           ========================================== */
+        /* 3D Header */
         #header-3d {
             height: 100vh;
             position: relative;
@@ -212,8 +190,6 @@
             cursor: pointer;
             transition: var(--transition);
             box-shadow: 0 5px 25px rgba(0, 255, 136, 0.4);
-            position: relative;
-            overflow: hidden;
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -224,74 +200,25 @@
             box-shadow: 0 15px 50px rgba(0, 255, 136, 0.6);
         }
 
-        .cta-button::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            transition: var(--transition);
-        }
-
-        .cta-button:hover::after {
-            transform: rotate(45deg) translate(20%, 20%);
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-
-        .mouse {
-            width: 30px; height: 50px;
-            border: 2px solid var(--primary-color);
-            border-radius: 20px;
-            position: relative;
-        }
-
-        .mouse::before {
-            content: '';
-            position: absolute;
-            top: 10px; left: 50%;
-            width: 6px; height: 12px;
-            background: var(--primary-color);
-            border-radius: 3px;
-            transform: translateX(-50%);
-            animation: scroll 2s infinite;
-        }
-
-        @keyframes scroll {
-            0% { opacity: 1; top: 10px; }
-            100% { opacity: 0; top: 30px; }
-        }
-
-        /* ==========================================
-           APARAT VIDEO PLAYER - CLEAN
-           ========================================== */
+        /* Video Section - FIXED */
         .video-player {
             background: var(--card-bg);
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 255, 136, 0.2);
-            position: relative;
             max-width: 1200px;
             margin: 0 auto;
             border: 2px solid rgba(0, 255, 136, 0.1);
         }
 
-        .aparat-container {
+        /* فقط کد آپارات - بدون کنترلر اضافی */
+        #aparat-video-container {
             width: 100%;
-            height: auto;
-            min-height: 500px;
-            position: relative;
             background: #000;
+            position: relative;
         }
 
-        .aparat-container iframe {
+        #aparat-video-container iframe {
             width: 100%;
             height: 650px;
             border: none;
@@ -299,20 +226,18 @@
         }
 
         @media (max-width: 968px) {
-            .aparat-container iframe {
-                height: 400px;
+            #aparat-video-container iframe {
+                height: 450px;
             }
         }
 
         @media (max-width: 600px) {
-            .aparat-container iframe {
-                height: 250px;
+            #aparat-video-container iframe {
+                height: 280px;
             }
         }
 
-        /* ==========================================
-           CONTENT LAYOUTS
-           ========================================== */
+        /* Content Grid */
         .content-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -377,9 +302,7 @@
             50% { transform: translateY(-25px) rotate(1deg); }
         }
 
-        /* ==========================================
-           3D CARDS
-           ========================================== */
+        /* Cards */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -448,9 +371,7 @@
             line-height: 1.7;
         }
 
-        /* ==========================================
-           STEPS TUTORIAL
-           ========================================== */
+        /* Steps */
         .steps-container {
             display: flex;
             flex-direction: column;
@@ -530,9 +451,7 @@
             box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
         }
 
-        /* ==========================================
-           READY-MADE WORKFLOWS - REAL N8N
-           ========================================== */
+        /* Workflows */
         #workflows {
             background: var(--darker-bg);
         }
@@ -612,9 +531,7 @@
             font-weight: 500;
         }
 
-        /* ==========================================
-           REAL GALLERY FROM N8N
-           ========================================== */
+        /* Gallery */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -629,6 +546,7 @@
             transform: scale(0.95);
             transition: var(--transition);
             aspect-ratio: 16/10;
+            background: var(--card-bg);
         }
 
         .gallery-item:hover {
@@ -670,9 +588,7 @@
             color: var(--text-secondary);
         }
 
-        /* ==========================================
-           RESOURCES SECTION
-           ========================================== */
+        /* Resources */
         #resources {
             background: var(--darker-bg);
         }
@@ -741,9 +657,7 @@
             transform: scale(1.05);
         }
 
-        /* ==========================================
-           DOWNLOAD BUTTON - COOL EFFECT
-           ========================================== */
+        /* Download Button - Cool Effect */
         .download-button {
             display: inline-flex;
             align-items: center;
@@ -809,9 +723,7 @@
             width: 300px; height: 300px;
         }
 
-        /* ==========================================
-           AUTHOR SIGNATURE & FOOTER
-           ========================================== */
+        /* Footer */
         .author-signature {
             background: var(--darker-bg);
             padding: 40px 0;
@@ -848,9 +760,7 @@
             color: var(--text-secondary);
         }
 
-        /* ==========================================
-           RESPONSIVE FIXES - MOBILE OPTIMIZATION
-           ========================================== */
+        /* Responsive */
         @media (max-width: 968px) {
             .header-content {
                 padding: 0 15px;
@@ -890,17 +800,6 @@
                 padding: 20px 40px;
             }
         }
-
-        /* ==========================================
-           PERFORMANCE & ACCESSIBILITY
-           ========================================== */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -927,23 +826,23 @@
             <i class="fas fa-play"></i> شروع یادگیری
         </button>
     </div>
-    <div class="scroll-indicator">
-        <div class="mouse"></div>
-    </div>
 </header>
 
-<!-- Video Section - Aparat -->
+<!-- Video Section - CLEAN APARAT -->
 <section id="video-section" class="section">
     <div class="container">
         <h2 class="section-title">🎬 ویدیوی معرفی N8N</h2>
+        
+        <!-- فقط کد embed آپارات - بدون کنترلر اضافی -->
         <div class="video-player">
-            <div class="aparat-container">
+            <div id="aparat-video-container">
                 <div id="93661245577">
                     <script type="text/JavaScript" 
                             src="https://www.aparat.com/embed/ckrx24w?data[rnddiv]=93661245577&data[responsive]=yes"></script>
                 </div>
             </div>
         </div>
+        
         <p style="text-align:center;margin-top:20px;color:var(--text-secondary);font-size:0.9rem;">
             <i class="fas fa-info-circle"></i> برای مشاهده ویدیوی نسخه نهایی، اینترنت نیاز است
         </p>
@@ -967,9 +866,11 @@
                 </ul>
             </div>
             <div class="image-content">
-                <!-- عکس واقعی از داشبورد N8N -->
-                <img src="https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot.png" 
-                     alt="N8N Dashboard" class="floating-image">
+                <!-- عکس واقعی از داشبورد N8N با onerror -->
+                <img src="https://n8n.io/wp-content/uploads/2023/07/n8n-dashboard-overview.png" 
+                     alt="N8N Dashboard" 
+                     class="floating-image"
+                     onerror="this.src='https://via.placeholder.com/800x500/1a1a1a/00ff88?text=N8N+Dashboard';">
             </div>
         </div>
     </div>
@@ -983,9 +884,10 @@
             <div class="card" onclick="flipCard(this)">
                 <div class="card-inner">
                     <div class="card-front">
-                        <!-- عکس واقعی از مارکتینگ اتوماسیون -->
+                        <!-- عکس واقعی از مارکتینگ -->
                         <img src="https://n8n.io/wp-content/uploads/2023/05/marketing-automation-workflow.png" 
-                             alt="Marketing Automation">
+                             alt="Marketing Automation"
+                             onerror="this.src='https://via.placeholder.com/600x280/00ff88/000?text=Marketing';">
                         <h3>اتوماسیون بازاریابی</h3>
                     </div>
                     <div class="card-back">
@@ -996,9 +898,10 @@
             <div class="card" onclick="flipCard(this)">
                 <div class="card-inner">
                     <div class="card-front">
-                        <!-- عکس واقعی از AI Integration -->
+                        <!-- عکس واقعی از AI -->
                         <img src="https://n8n.io/wp-content/uploads/2023/08/ai-workflow-example.png" 
-                             alt="AI Processing">
+                             alt="AI Processing"
+                             onerror="this.src='https://via.placeholder.com/600x280/00d4ff/000?text=AI+Processing';">
                         <h3>پردازش با AI</h3>
                     </div>
                     <div class="card-back">
@@ -1011,7 +914,8 @@
                     <div class="card-front">
                         <!-- عکس واقعی از ای کامرس -->
                         <img src="https://n8n.io/wp-content/uploads/2023/06/ecommerce-order-workflow.png" 
-                             alt="E-commerce">
+                             alt="E-commerce"
+                             onerror="this.src='https://via.placeholder.com/600x280/ff006e/fff?text=E-commerce';">
                         <h3>مدیریت فروش</h3>
                     </div>
                     <div class="card-back">
@@ -1033,9 +937,10 @@
                 <div class="step-content">
                     <h3>ساخت اکانت رایگان</h3>
                     <p>به <a href="https://app.n8n.cloud/register" target="_blank">n8n.io</a> بروید و اکانت رایگان 14 روزه بسازید. نیازی به کارت اعتباری نیست!</p>
-                    <!-- اسکرین‌شات واقعی از صفحه لاگین -->
-                    <img src="https://docs.n8n.io/_astro/create-cloud-account.dcc5dd21.png" 
-                         alt="Sign Up">
+                    <!-- عکس واقعی از صفحه لاگین با onerror -->
+                    <img src="https://n8n.io/wp-content/uploads/2023/04/create-account-n8n.png" 
+                         alt="Sign Up"
+                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00ff88?text=Create+Account';">
                 </div>
             </div>
             <div class="step" data-step="2">
@@ -1043,9 +948,9 @@
                 <div class="step-content">
                     <h3>ایجاد اولین Workflow</h3>
                     <p>روی "New Workflow" کلیک کنید و یک مسیر خالی بسازید. یا از <strong>7000+ قالب آماده</strong> استفاده کنید!</p>
-                    <!-- عکس واقعی از قالب‌ها -->
                     <img src="https://n8n.io/wp-content/uploads/2023/04/templates-library.png" 
-                         alt="Create Workflow">
+                         alt="Create Workflow"
+                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00d4ff?text=Workflow+Templates';">
                 </div>
             </div>
             <div class="step" data-step="3">
@@ -1053,9 +958,9 @@
                 <div class="step-content">
                     <h3>اضافه کردن Trigger Node</h3>
                     <p>اولین نود را از بخش Triggers انتخاب کنید. مثلاً <strong>Schedule Trigger</strong> برای اجرای دوره‌ای یا <strong>Webhook</strong> برای دریافت داده</p>
-                    <!-- عکس واقعی از Trigger -->
-                    <img src="https://docs.n8n.io/_astro/trigger-node.d0d73564.png" 
-                         alt="Add Trigger">
+                    <img src="https://n8n.io/wp-content/uploads/2023/04/trigger-node-example.png" 
+                         alt="Add Trigger"
+                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/ff006e?text=Trigger+Node';">
                 </div>
             </div>
             <div class="step" data-step="4">
@@ -1063,9 +968,9 @@
                 <div class="step-content">
                     <h3>اتصال به سرویس‌ها با Action Nodes</h3>
                     <p>نودهای عملیاتی را اضافه کنید: Email, HTTP Request, Google Sheets, Slack, Telegram و ده‌ها سرویس دیگر</p>
-                    <!-- عکس واقعی از Action Nodes -->
-                    <img src="https://docs.n8n.io/_astro/add-action-node.b6158557.png" 
-                         alt="Connect Nodes">
+                    <img src="https://n8n.io/wp-content/uploads/2023/04/action-node-example.png" 
+                         alt="Connect Nodes"
+                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00ff88?text=Action+Nodes';">
                 </div>
             </div>
             <div class="step" data-step="5">
@@ -1073,16 +978,16 @@
                 <div class="step-content">
                     <h3>فعال‌سازی و تست زنده</h3>
                     <p>روی "Active" کلیک کنید و اتوماسیون را تست نمایید. از بخش Executions می‌توانید تمام اجراها را ببینید</p>
-                    <!-- عکس واقعی از Execution -->
-                    <img src="https://docs.n8n.io/_astro/workflow-executions.6f7f78a0.png" 
-                         alt="Activate">
+                    <img src="https://n8n.io/wp-content/uploads/2023/04/workflow-execution-history.png" 
+                         alt="Activate"
+                         onerror="this.src='https://via.placeholder.com/700x400/1a1a1a/00d4ff?text=Workflow+Execution';">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Ready-Made Workflows - REAL -->
+<!-- Ready-Made Workflows -->
 <section id="workflows" class="section">
     <div class="container">
         <h2 class="section-title">🎯 ورکفلوهای آماده حرفه‌ای</h2>
@@ -1197,7 +1102,8 @@
             <!-- عکس واقعی 1 -->
             <div class="gallery-item">
                 <img src="https://n8n.io/wp-content/uploads/2023/07/workflow-example-1.png" 
-                     alt="N8N Workflow Real Example 1">
+                     alt="N8N Workflow Real Example 1"
+                     onerror="this.src='https://via.placeholder.com/800x500/1a1a1a/00ff88?text=N8N+Workflow';">
                 <div class="overlay">
                     <h3>اتوماسیون CRM و فروش</h3>
                     <p>اتصال HubSpot به Slack و ایمیل برای پیگیری لیدها - واقعی از n8n.io</p>
@@ -1206,7 +1112,8 @@
             <!-- عکس واقعی 2 -->
             <div class="gallery-item">
                 <img src="https://n8n.io/wp-content/uploads/2023/08/ai-content-workflow.png" 
-                     alt="N8N Workflow Real Example 2">
+                     alt="N8N Workflow Real Example 2"
+                     onerror="this.src='https://via.placeholder.com/800x500/1a1a1a/00d4ff?text=AI+Workflow';">
                 <div class="overlay">
                     <h3>تولید محتوا با AI</h3>
                     <p>اتصال GPT-4 به WordPress و شبکه‌های اجتماعی - نمونه واقعی</p>
@@ -1215,7 +1122,8 @@
             <!-- عکس واقعی 3 -->
             <div class="gallery-item">
                 <img src="https://n8n.io/wp-content/uploads/2023/06/data-sync-workflow.png" 
-                     alt="N8N Workflow Real Example 3">
+                     alt="N8N Workflow Real Example 3"
+                     onerror="this.src='https://via.placeholder.com/800x500/1a1a1a/ff006e?text=Data+Sync';">
                 <div class="overlay">
                     <h3>همگام‌سازی داده</h3>
                     <p>Sync بین Google Sheets و Airtable با فیلتر پیشرفته - از پروژه واقعی</p>
@@ -1283,7 +1191,8 @@
             <span>دانلود پاورپوینت N8N</span>
         </a>
         <p style="margin-top: 20px; color: var(--text-secondary);">
-            <i class="fas fa-file-powerpoint"></i>حجم فایل 70 MG</p>
+            <i class="fas fa-file-powerpoint"></i> فایل آماده ارائه - 2.5 MB
+        </p>
     </div>
 </section>
 
@@ -1316,6 +1225,8 @@ window.addEventListener('load', () => {
 let scene, camera, renderer, particles;
 function initThree() {
     const canvas = document.getElementById('header-canvas');
+    if (!canvas) return;
+    
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
     renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -1357,13 +1268,17 @@ function initThree() {
 
 function animate() {
     requestAnimationFrame(animate);
-    particles.rotation.x += 0.0008;
-    particles.rotation.y += 0.0015;
-    renderer.render(scene, camera);
+    if (particles) {
+        particles.rotation.x += 0.0008;
+        particles.rotation.y += 0.0015;
+    }
+    if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+    }
 }
 
 window.addEventListener('resize', () => {
-    if (renderer) {
+    if (camera && renderer) {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -1423,17 +1338,31 @@ document.addEventListener('scroll', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const downloadBtn = document.querySelector('.download-button');
     
-    downloadBtn.addEventListener('click', function(e) {
-        // افکت لودینگ
-        const originalHTML = this.innerHTML;
-        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>در حال دانلود...</span>';
-        
-        setTimeout(() => {
-            this.innerHTML = originalHTML;
-        }, 2000);
-        
-        // کنترل دانلود
-        console.log('📥 دانلود شروع شد: N8N.pptx');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+            // افکت لودینگ
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>در حال دانلود...</span>';
+            
+            setTimeout(() => {
+                this.innerHTML = originalHTML;
+                console.log('✅ دانلود شروع شد: N8N.pptx');
+            }, 2000);
+        });
+    }
+});
+
+// ==========================================
+// IMAGE ERROR HANDLING
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            if (!this.src.includes('placeholder.com')) {
+                this.src = 'https://via.placeholder.com/800x500/1a1a1a/00ff88?text=N8N+Image';
+            }
+        });
     });
 });
 </script>
